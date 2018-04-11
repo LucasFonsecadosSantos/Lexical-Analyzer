@@ -1,6 +1,8 @@
 package app;
 
+import enumModel.LexemeType;
+
 public class SymbolTable {
 
-    private String
+    private LeximaType type;
 }

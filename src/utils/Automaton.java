@@ -56,11 +56,13 @@ public class Automaton {
                             continue;
                         } else {
                             if (isOperand(lexeme.charAt(i))) {
+                                //ENCONTROU OPERANDO NO MEIO DO NUMERO
                                 //adicionar o operando a tabela de simbulos;
                                 //verificar se o proximo e operando
                                     //se for, erro,
-                                    // se nao for, 
+                                    // se nao for,
                             } else {
+                                //É SEPARADOR OU LETRA
                                 LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
                                 error = true;
                                 break;
@@ -74,15 +76,31 @@ public class Automaton {
                     for (int i=1 ; i < lexeme.length() ; i++) {
                         if (isCharacter(lexeme.charAt(i) || isNumber(lexeme.charAt(i))) {
                             tmpLexeme += lexeme.charAt(i);
+                            continue;
                         } else {
-
+                            if (isOperand(lexeme.charAt(i))) {
+                                //PALAVRA ENCONTROU UM OPERANDO NO MEIO
+                            } else if(isSeparator(lexeme.charAt(i))) {
+                                //PALAVRA COM SEPADOR
+                            } else {
+                                LexicalErrors.addError(LexicalErrors.type.INVALID_CHARACTER_ERR ,index);
+                                error = true;
+                                break;
+                            }
+                        }
+                        if (!error) {
+                            //ADICIONA NA TABELA DE SIMBULOS COMO UM BAGUI SINISTRO DE IDENTIFICADOR
                         }
                     }
                 } else if (isOperand(lexeme.charAt(0))) {
-                
-                } else if (isSeparator(lexeme.charAt(0))) {
+                    if(isOperand(lexeme.charAt(2))) {
+                        LexicalErrors.addError(LexicalErrors.type.INVALID_OPERAND_ERR ,index);
+                        error = true;
+                    } else if(isOperand(lexeme.charAt(2) )) {
 
-                }
+                    }
+                } else if (isSeparator(lexeme.charAt(0))) {
+                    
                 } else {
                     continue;
                 }
