@@ -8,6 +8,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * 
+ */
 public class FileHandler {
     
     public static List<String> getSourceCode(String fileName) {
@@ -26,8 +29,7 @@ public class FileHandler {
             System.out.println(ioe.toString());
         } catch (Exception e) {
             System.out.println(e.toString());
-        } finally {
-            return null;
         }
+        return null;
     }
 }
