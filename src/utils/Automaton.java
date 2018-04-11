@@ -22,7 +22,7 @@ public class Automaton {
 
     public Automaton() {
         this.numbers = new char[] {
-            '0', '1', '2', '3', '4', '5'
+            '0', '1', '2', '3', '4', '5',
             '6', '7', '8', '9'
         };
         this.reservedWords = new String[]{
@@ -33,11 +33,11 @@ public class Automaton {
             "return", "static", "super", "this", "true",
             "void", "while"
         };
-        this.operators = new String[]{
+        this.operators = new String[] {
             "=", "==", ">", "++", "&&",
             "<=", "!", "-", "--", "+", 
             "+=", "*"};
-        this.separators = new char[]{
+        this.separators = new char[] {
             ',', '.', '[', '{', '(', ')', '}', ']'
         };
     }
@@ -45,71 +45,117 @@ public class Automaton {
     public void makeTokens(String sourceLine, int index) {
         if (!sourceLine.equals("")) {
             String[] lexemes = sourceLine.split(" ");
+            String[] splitedLexeme;
             String tmpLexeme;
-            Boolean error = false;
+            Boolean error;
             for (String lexeme : lexemes) {
                 tmpLexeme = "";
-                if (isNumber(lexeme.charAt(0))) {
-                    for (int i=1 ; i < lexeme.length() ; i++) {
-                        if (isNumber(lexeme.charAt(i))) {
-                            tmpLexeme += lexeme.charAt(i);
-                            continue;
-                        } else {
-                            if (isOperand(lexeme.charAt(i))) {
-                                //ENCONTROU OPERANDO NO MEIO DO NUMERO
-                                //adicionar o operando a tabela de simbulos;
-                                //verificar se o proximo e operando
-                                    //se for, erro,
-                                    // se nao for,
-                            } else {
-                                //É SEPARADOR OU LETRA
-                                LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
-                                error = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!error) {
-                        //ADICIONA NA TABELA DE SIMBULOS COMO UM BAGUI NUMERO
-                    }
-                } else if (isCharacter(lexeme.charAt(0))) {
-                    for (int i=1 ; i < lexeme.length() ; i++) {
-                        if (isCharacter(lexeme.charAt(i) || isNumber(lexeme.charAt(i))) {
-                            tmpLexeme += lexeme.charAt(i);
-                            continue;
-                        } else {
-                            if (isOperand(lexeme.charAt(i))) {
-                                //PALAVRA ENCONTROU UM OPERANDO NO MEIO
-                            } else if(isSeparator(lexeme.charAt(i))) {
-                                //PALAVRA COM SEPADOR
-                            } else {
-                                LexicalErrors.addError(LexicalErrors.type.INVALID_CHARACTER_ERR ,index);
-                                error = true;
-                                break;
-                            }
-                        }
-                        if (!error) {
-                            //ADICIONA NA TABELA DE SIMBULOS COMO UM BAGUI SINISTRO DE IDENTIFICADOR
-                        }
-                    }
-                } else if (isOperand(lexeme.charAt(0))) {
-                    if(isOperand(lexeme.charAt(2))) {
-                        LexicalErrors.addError(LexicalErrors.type.INVALID_OPERAND_ERR ,index);
-                        error = true;
-                    } else if(isOperand(lexeme.charAt(2) )) {
+                error = false;
+                if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
+                    
+                    if(isNumber(lexeme.charAt(0))) {
+
+                    } else if (isCharacter(lexeme.charAt(0))) {
 
                     }
-                } else if (isSeparator(lexeme.charAt(0))) {
-                    
                 } else {
-                    continue;
+                    for (String lexemeSplited : splitedLexeme) {
+                        tmpLexeme = "";
+                        if (isNumber(lexemeSplited.charAt(0))) {
+                            for (int i = 1 ; i < lexemeSplited.length() ; i++) {
+                                if (isNumber(lexemeSplited.charAt(i))) {
+                                    tmpLexeme += lexemeSplited.charAt(i);
+                                } else {
+                                    LexicalErrors.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index);
+                                    error = true;
+                                    break;
+                                }
+                            }
+                            if (!error) {
+                                //ADICIONA NA TABELA DE SIMBOLO
+                            }
+                        } else if (isCharacter(lexemeSplited.charAt(0))) {
+                            for (int i = 1 ; i < lexemeSplited.length() ; i++) {
+                                if ((isCharacter(lexemeSplited.charAt(i))) || (isNumber(lexemeSplited.charAt(i)))) {
+                                    tmpLexeme += lexemeSplited.charAt(i);
+                                } else {
+                                    LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
+                                    error = true;
+                                    break;
+                                }
+                            }
+                            if (!error) {
+                                //ADD A TABELA DE SIMBOLO
+                            }
+                        } else if (isOperand(lexemeSplited.charAt(0))) {
+                            //adiciona direto a tabela de simbolo
+                        } else if (isSeparator(lexemeSplited.charAt(0))) {
+                            //adiciona direto a tabela de simbolos
+                        }
+                    }
                 }
             }
-            return;
         } else {
             return;
         }
+                
     }
+
+    private String[] sliptBySpecialCharacteres(String lexeme) {
+        
+        /*
+        String[] bosta = lexeme.replaceAll(
+            "==", "#==#"
+        ).replaceAll(
+            "=", "#=#"
+        ).replaceAll(
+            ">", "#>#"
+        ).replaceAll(
+            "&&", "#&&#"
+        ).replaceAll(
+            "++", "#++#"
+        ).replaceAll(
+            "<=", "#<=#"
+        ).replaceAll(
+            "!", "#!#"
+        ).replaceAll(
+            "-", "#-#"
+        ).replaceAll(
+            "--", "#--#"
+        ).replaceAll(
+            "+", "#+#"
+        ).replaceAll(
+            "+=", "#+=#"
+        ).replaceAll(
+            "*", "#*#"
+        ).replaceAll(
+            ",", "#,#"
+        ).replaceAll(
+            ".", "#.#"
+        ).replaceAll(
+            "[", "#[#"
+        ).replaceAll(
+            "{", "#{#"
+        ).replaceAll(
+            "(", "#(#"
+        ).replaceAll(
+            ")", "#)#"
+        ).replaceAll(
+            "}", "#}#"
+        ).replaceAll(
+            "]", "#]#"
+        ).split( "#");
+        System.out.println(bosta.hashCode());*/
+        return null;
+    }
+
+    private Boolean isCharacter(char character) {
+        if (Character.isLetter(character)) {
+            return true;
+        } else {
+            return false;
+        }
+    } 
 
     private Boolean isOperand(char operand) {
         String operandStr = String.valueOf(operand);
