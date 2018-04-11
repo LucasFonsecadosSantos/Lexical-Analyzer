@@ -1,4 +1,4 @@
-package utils;
+package enumModel;
 
 public enum ErrorType {
     INVALID_LEXEME_ERR,

@@ -17,9 +17,14 @@ public class Automaton {
 
     String[] reservedWords;
     String[] operators;
-    String[] separators;
+    char[] separators;
+    char[] numbers;
 
     public Automaton() {
+        this.numbers = new char[] {
+            '0', '1', '2', '3', '4', '5'
+            '6', '7', '8', '9'
+        };
         this.reservedWords = new String[]{
             "abstract", "boolean", "char", "else",
             "class", "extends", "false", "import",
@@ -32,8 +37,8 @@ public class Automaton {
             "=", "==", ">", "++", "&&",
             "<=", "!", "-", "--", "+", 
             "+=", "*"};
-        this.separators = new String[]{
-            ",", ".", "[", "{", "(", ")", "}", "]"
+        this.separators = new char[]{
+            ',', '.', '[', '{', '(', ')', '}', ']'
         };
     }
 
@@ -43,19 +48,43 @@ public class Automaton {
             String tmpLexeme;
             Boolean error = false;
             for (String lexeme : lexemes) {
+                tmpLexeme = "";
                 if (isNumber(lexeme.charAt(0))) {
                     for (int i=1 ; i < lexeme.length() ; i++) {
                         if (isNumber(lexeme.charAt(i))) {
+                            tmpLexeme += lexeme.charAt(i);
                             continue;
                         } else {
-                            LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
-                            error = true;
-                            break;
+                            if (isOperand(lexeme.charAt(i))) {
+                                //adicionar o operando a tabela de simbulos;
+                                //verificar se o proximo e operando
+                                    //se for, erro,
+                                    // se nao for, 
+                            } else {
+                                LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
+                                error = true;
+                                break;
+                            }
                         }
                     }
                     if (!error) {
                         //ADICIONA NA TABELA DE SIMBULOS COMO UM BAGUI NUMERO
                     }
+                } else if (isCharacter(lexeme.charAt(0))) {
+                    for (int i=1 ; i < lexeme.length() ; i++) {
+                        if (isCharacter(lexeme.charAt(i) || isNumber(lexeme.charAt(i))) {
+                            tmpLexeme += lexeme.charAt(i);
+                        } else {
+
+                        }
+                    }
+                } else if (isOperand(lexeme.charAt(0))) {
+                
+                } else if (isSeparator(lexeme.charAt(0))) {
+
+                }
+                } else {
+                    continue;
                 }
             }
             return;
@@ -64,16 +93,31 @@ public class Automaton {
         }
     }
 
-    private Boolean isNumber(char lexeme) {
-        if (
-            lexeme == '0' || lexeme == '1' || lexeme == '2' ||
-            lexeme == '3' || lexeme == '4' || lexeme == '5' ||
-            lexeme == '6' || lexeme == '7' || lexeme ==  '8' ||
-            lexeme == '9'
-        ) {
-            return true;
-        } else {
-            return false;
+    private Boolean isOperand(char operand) {
+        String operandStr = String.valueOf(operand);
+        for (String operator : this.operators) {
+            if (operator.equals(operandStr)) {
+                return true;
+            }
         }
+        return false;
+    }
+
+    private Boolean isSeparator(char separatorChar) {
+        for (char separator : this.separators) {
+            if (separatorChar == separator) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean isNumber(char lexeme) {
+        for (char number : this.numbers) {
+            if (lexeme == number) {
+                return true;
+            }
+        }
+        return false;
     }
 }

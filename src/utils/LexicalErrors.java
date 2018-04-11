@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.LinkedHashMap;
+import enumModel.ErrorType;
 
 public class LexicalErrors {
     
