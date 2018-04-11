@@ -103,15 +103,15 @@ public class Automaton {
 
     private String[] sliptBySpecialCharacteres(String lexeme) {
         
-        /*
-        String[] bosta = lexeme.replaceAll(
+        
+        return lexeme.replaceAll(
             "==", "#==#"
+        ).replaceAll(
+            "&&", "#&&#"
         ).replaceAll(
             "=", "#=#"
         ).replaceAll(
             ">", "#>#"
-        ).replaceAll(
-            "&&", "#&&#"
         ).replaceAll(
             "++", "#++#"
         ).replaceAll(
@@ -145,8 +145,6 @@ public class Automaton {
         ).replaceAll(
             "]", "#]#"
         ).split( "#");
-        System.out.println(bosta.hashCode());*/
-        return null;
     }
 
     private Boolean isCharacter(char character) {
