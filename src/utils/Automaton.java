@@ -51,26 +51,21 @@ public class Automaton {
             for (String lexeme : lexemes) {
                 tmpLexeme = "";
                 error = false;
-                System.out.println("lexeme: " + lexeme + "("+index+")");
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
-                    System.out.println("N Possui separador: " + lexeme);
                     if(isNumber(lexeme.charAt(0))) {
 
                     } else if (isCharacter(lexeme.charAt(0))) {
 
                     }
                 } else {
-                    System.out.println("Possui separador: " + lexeme);
                     for (String s : splitedLexeme) {
                         System.out.println(s);
                     }
                     for (String lexemeSplited : splitedLexeme) {
                         tmpLexeme = "";
                         if (isNumber(lexemeSplited.charAt(0))) {
-                            System.out.println("aopskd"+tmpLexeme);
                             tmpLexeme += lexemeSplited.charAt(0);
                             for (int i = 1 ; i <= lexemeSplited.length() ; i++) {
-                                System.out.println("aopskd"+tmpLexeme);
                                 if (isNumber(lexemeSplited.charAt(i))) {
                                     tmpLexeme += lexemeSplited.charAt(i);
                                 } else {
@@ -84,7 +79,7 @@ public class Automaton {
                             }
                         } else if (isCharacter(lexemeSplited.charAt(0))) {
                             tmpLexeme += lexemeSplited.charAt(0);
-                            for (int i = 1 ; i < lexemeSplited.length() ; i++) {
+                            for (int i = 1 ; i <= lexemeSplited.length() ; i++) {
                                 if ((isCharacter(lexemeSplited.charAt(i))) || (isNumber(lexemeSplited.charAt(i)))) {
                                     tmpLexeme += lexemeSplited.charAt(i);
                                 } else {
@@ -97,7 +92,7 @@ public class Automaton {
                                 //ADD A TABELA DE SIMBOLO
                             }
                         } else if (isOperand(lexemeSplited.charAt(0))) {
-                            //adiciona direto a tabela de simbolo
+                            
                         } else if (isSeparator(lexemeSplited.charAt(0))) {
                             //adiciona direto a tabela de simbolos
                         }
@@ -111,62 +106,13 @@ public class Automaton {
     }
 
     private String[] sliptBySpecialCharacteres(String lexeme) {
-        
-        for (String operand : this.operators) {
-            if (lexeme.contains(operand)) {
-                return lexeme.replaceAll("(==?|&&|\\+[+=]?|<=|--?|[>!*,.\\[{()}\\]])", "#$1#").split("#");
-            }
-        }
-
         for (char separator : this.separators) {
             if (lexeme.contains(String.valueOf(separator))) {
-                return lexeme.replaceAll("(==?|&&|\\+[+=]?|<=|--?|[>!*,.\\[{()}\\]])", "#$1#").split("#");
+                return lexeme.replaceAll("(##|[++]|--|[+]|&&|==|>|<|!|-|;|[+]|=|[*]|,|[.]|\\{|\\}|\\[|\\]|\\(|\\))", "#$1#").split("#");
             }
         }
         return null;
-        
-        /*
-        return lexeme.replaceAll(
-            "==", "#==#"
-        ).replaceAll(
-            "&&", "#&&#"
-        ).replaceAll(
-            "=", "#=#"
-        ).replaceAll(
-            ">", "#>#"
-        ).replaceAll(
-            "++", "#++#"
-        ).replaceAll(
-            "<=", "#<=#"
-        ).replaceAll(
-            "!", "#!#"
-        ).replaceAll(
-            "-", "#-#"
-        ).replaceAll(
-            "--", "#--#"
-        ).replaceAll(
-            "+", "#+#"
-        ).replaceAll(
-            "+=", "#+=#"
-        ).replaceAll(
-            "*", "#*#"
-        ).replaceAll(
-            ",", "#,#"
-        ).replaceAll(
-            ".", "#.#"
-        ).replaceAll(
-            "[", "#[#"
-        ).replaceAll(
-            "{", "#{#"
-        ).replaceAll(
-            "(", "#(#"
-        ).replaceAll(
-            ")", "#)#"
-        ).replaceAll(
-            "}", "#}#"
-        ).replaceAll(
-            "]", "#]#"
-        ).split( "#");*/
+    
     }
 
     private Boolean isCharacter(char character) {
@@ -197,7 +143,6 @@ public class Automaton {
     }
 
     private Boolean isNumber(char lexeme) {
-        System.out.println("aopsdjk: " + lexeme);
         for (char number : this.numbers) {
             if (lexeme == number) {
                 return true;
