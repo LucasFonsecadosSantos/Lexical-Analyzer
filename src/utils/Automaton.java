@@ -25,6 +25,7 @@ import view.GUI;
 import app.SymbolTable;
 import model.LexemeType;
 import app.LexemeTable;
+import app.Token;
 import app.LexicalTablesInterface;
 import java.util.List;
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class Automaton {
             "<=", "!", "-", "--", "+", 
             "+=", "*"};
         this.separators = new char[] {
-            ',', '.', '[', '{', '(', ')', '}', ']'
+            ',', '.', '[', '{', '(', ')', '}', ']',';'
         };
         this.tables = new List[2];
         this.tables[0] = new ArrayList<SymbolTable>();
@@ -83,28 +84,28 @@ public class Automaton {
             String[] splitedLexeme;
             String tmpLexeme;
             Boolean error;
+            char currentSymbol;
             
             for (String lexeme : lexemes) {
                 tmpLexeme = "";
                 error = false;
-
+                System.out.println(lexeme);
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
-                    if(isNumber(lexeme.charAt(0))) {
-
-                    } else if (isCharacter(lexeme.charAt(0))) {
-
-                    }
+                    
+                    
                 } else {
                     for (String s : splitedLexeme) {
                         System.out.println(s);
                     }
                     for (String lexemeSplited : splitedLexeme) {
                         tmpLexeme = "";
-                        if (isNumber(lexemeSplited.charAt(0))) {
-                            tmpLexeme += lexemeSplited.charAt(0);
+                        currentSymbol = lexemeSplited.charAt(2);
+                        if (isNumber(currentSymbol)) {
+                            tmpLexeme += currentSymbol;
                             for (int i = 1 ; i <= lexemeSplited.length() ; i++) {
-                                if (isNumber(lexemeSplited.charAt(i))) {
-                                    tmpLexeme += lexemeSplited.charAt(i);
+                                currentSymbol = lexemeSplited.charAt(i);
+                                if (isNumber(currentSymbol)) {
+                                    tmpLexeme += currentSymbol;
                                 } else {
                                     LexicalErrors.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index);
                                     error = true;
@@ -112,14 +113,18 @@ public class Automaton {
                                 }
                             }
                             if (!error) {
-                                this.tables[SYMBOL_TABLE].add(new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme)); 
-                                //tokens.add(new Token(Token));
+                                //FOUND A NUMBER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
+                                SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme);
+                                this.tables[SYMBOL_TABLE].add(symbol); 
+                                this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme, new Token(LexemeType.INT_LITERAL, symbol.getIndex())));
                             }
-                        } else if (isCharacter(lexemeSplited.charAt(0))) {
-                            tmpLexeme += lexemeSplited.charAt(0);
+                        } else if (isCharacter(currentSymbol)) {
+                            currentSymbol = lexemeSplited.charAt(0);
+                            tmpLexeme += currentSymbol;
                             for (int i = 1 ; i <= lexemeSplited.length() ; i++) {
-                                if ((isCharacter(lexemeSplited.charAt(i))) || (isNumber(lexemeSplited.charAt(i)))) {
-                                    tmpLexeme += lexemeSplited.charAt(i);
+                                currentSymbol = lexemeSplited.charAt(i);
+                                if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
+                                    tmpLexeme += currentSymbol;
                                 } else {
                                     LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
                                     error = true;
@@ -146,8 +151,10 @@ public class Automaton {
 
     private String[] sliptBySpecialCharacteres(String lexeme) {
         for (char separator : this.separators) {
-            if (lexeme.contains(String.valueOf(separator))) {
-                return lexeme.replaceAll("(##|[++]|--|[+]|&&|==|>|<|!|-|;|[+]|=|[*]|,|[.]|\\{|\\}|\\[|\\]|\\(|\\))", "#$1#").split("#");
+            for (String operand : this.operators) {
+                if (lexeme.contains(String.valueOf(separator)) || lexeme.contains(operand)) {
+                    return lexeme.replaceAll("(==?|&&|\\+[+=]?|<=|--?|[>!*,;.\\[{()}\\]])", "#$1#").split("#");
+                }
             }
         }
         return null;

@@ -1,1 +1,3 @@
-private static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";
+public void string {
+    class about;
+}

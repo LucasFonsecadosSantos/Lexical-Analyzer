@@ -52,7 +52,7 @@ public class LexicalAnalyzer {
     /**
      * Source code data list attribute
      */
-    private List[] lexicalTables;
+    private List<List[]> lexicalTables;
 
     private final int SYMBOL_TABLE = 0;
     private final int LEXEME_TABLE = 0;
@@ -69,6 +69,7 @@ public class LexicalAnalyzer {
         System.out.println(fileName);
         this.sourceCode = FileHandler.getSourceCode(fileName);
         this.automaton = new Automaton();
+        this.lexicalTables = new ArrayList<List[]>();
     }
 
     /**
@@ -81,7 +82,11 @@ public class LexicalAnalyzer {
         int lineIndex = 0;
         for (String line : this.sourceCode) {
             ++lineIndex;
-            this.lexicalTables = this.automaton.makeTokens(line, lineIndex);
+            this.lexicalTables.add(this.automaton.makeTokens(line, lineIndex));
+        }
+
+        for (int i=0; i<lexicalTables.size(); i++) {
+            System.out.println(this.lexicalTables.get(i)[SYMBOL_TABLE].get(0).hashCode());
         }
     }
 
