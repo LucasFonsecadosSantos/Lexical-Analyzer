@@ -89,6 +89,7 @@ public class Automaton {
             for (String lexeme : lexemes) {
                 tmpLexeme = "";
                 error = false;
+                if(lexeme.equals("")) continue;
                 System.out.println(lexeme);
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
                     
@@ -99,10 +100,11 @@ public class Automaton {
                     }
                     for (String lexemeSplited : splitedLexeme) {
                         tmpLexeme = "";
-                        currentSymbol = lexemeSplited.charAt(2);
+                        if(lexemeSplited.equals("")) continue;
+                        currentSymbol = lexemeSplited.charAt(0);
                         if (isNumber(currentSymbol)) {
                             tmpLexeme += currentSymbol;
-                            for (int i = 1 ; i <= lexemeSplited.length() ; i++) {
+                            for (int i = 1 ; i < lexemeSplited.length() ; i++) {
                                 currentSymbol = lexemeSplited.charAt(i);
                                 if (isNumber(currentSymbol)) {
                                     tmpLexeme += currentSymbol;
