@@ -21,12 +21,12 @@
  */
 package app;
 
-import enumModel.LexemeType;
+import model.LexemeType;
 
-public class SymbolTable implements LexicalTablesInterface {
+public class SymbolTable extends LexicalTablesInterface {
 
     private static int index = 0;
-    private static LexemeType type;
+    protected static LexemeType type;
     private String description;
 
     public SymbolTable(LexemeType type, String lexeme) {
@@ -51,10 +51,6 @@ public class SymbolTable implements LexicalTablesInterface {
 
     public void setLexemeType(LexemeType type) {
         this.type = type;
-    }
-
-    public void setLexeme(String lexeme) {
-        this.lexeme = lexeme;
     }
 
     public LexemeType getLexemeType() {

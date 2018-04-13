@@ -1,6 +1,6 @@
 package app;
 
-public class LexemeTable implements LexicalTablesInterface {
+public class LexemeTable extends LexicalTablesInterface {
 
     private Token token;
     

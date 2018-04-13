@@ -23,6 +23,8 @@ package utils;
 
 import view.GUI;
 import app.SymbolTable;
+import model.LexemeType;
+import app.LexemeTable;
 import app.LexicalTablesInterface;
 import java.util.List;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class Automaton {
     private String[] operators;
     private char[] separators;
     private char[] numbers;
-    private List<LexicalTablesInterface>[] tables;
+    private List[] tables;
     private static final int SYMBOL_TABLE = 0;
     private static final int LEXICAL_TABLE = 1; 
 
@@ -70,12 +72,12 @@ public class Automaton {
         this.separators = new char[] {
             ',', '.', '[', '{', '(', ')', '}', ']'
         };
-        this.tables = new List<LexicalTablesInterface>[2];
+        this.tables = new List[2];
         this.tables[0] = new ArrayList<SymbolTable>();
         this.tables[1] = new ArrayList<LexemeTable>();
     }
 
-    public List<SymbolTable> makeTokens(String sourceLine, int index) {
+    public List[] makeTokens(String sourceLine, int index) {
         if (!sourceLine.equals("")) {
             String[] lexemes = sourceLine.split(" ");
             String[] splitedLexeme;
@@ -110,7 +112,7 @@ public class Automaton {
                                 }
                             }
                             if (!error) {
-                                this.tables[0] 
+                                this.tables[SYMBOL_TABLE].add(new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme)); 
                                 //tokens.add(new Token(Token));
                             }
                         } else if (isCharacter(lexemeSplited.charAt(0))) {
@@ -135,7 +137,7 @@ public class Automaton {
                     }
                 }
             }
-            return tokens;
+            return this.tables;
         } else {
             return null;
         }

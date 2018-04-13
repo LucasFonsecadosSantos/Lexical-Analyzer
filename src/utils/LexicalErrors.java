@@ -22,7 +22,7 @@
 package utils;
 
 import java.util.LinkedHashMap;
-import enumModel.ErrorType;
+import model.ErrorType;
 
 public class LexicalErrors {
     
