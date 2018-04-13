@@ -23,11 +23,10 @@ package app;
 
 import enumModel.LexemeType;
 
-public class SymbolTable {
+public class SymbolTable implements LexicalTablesInterface {
 
     private static int index = 0;
-    private LexemeType type;
-    private String lexeme;
+    private static LexemeType type;
     private String description;
 
     public SymbolTable(LexemeType type, String lexeme) {
@@ -36,6 +35,10 @@ public class SymbolTable {
         setLexeme(lexeme);
         setDescription();
         increaseIndex();
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public void increaseIndex() {
@@ -54,16 +57,8 @@ public class SymbolTable {
         this.lexeme = lexeme;
     }
 
-    public int getIndex() {
-        return this.index;
-    }
-
     public LexemeType getLexemeType() {
         return this.type;
-    }
-
-    public String getLexeme() {
-        return this.lexeme;
     }
 
     public void setDescription() {

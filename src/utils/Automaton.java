@@ -23,6 +23,7 @@ package utils;
 
 import view.GUI;
 import app.SymbolTable;
+import app.LexicalTablesInterface;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -41,10 +42,13 @@ import java.util.ArrayList;
  */
 public class Automaton {
 
-    String[] reservedWords;
-    String[] operators;
-    char[] separators;
-    char[] numbers;
+    private String[] reservedWords;
+    private String[] operators;
+    private char[] separators;
+    private char[] numbers;
+    private List<LexicalTablesInterface>[] tables;
+    private static final int SYMBOL_TABLE = 0;
+    private static final int LEXICAL_TABLE = 1; 
 
     public Automaton() {
         this.numbers = new char[] {
@@ -66,11 +70,13 @@ public class Automaton {
         this.separators = new char[] {
             ',', '.', '[', '{', '(', ')', '}', ']'
         };
+        this.tables = new List<LexicalTablesInterface>[2];
+        this.tables[0] = new ArrayList<SymbolTable>();
+        this.tables[1] = new ArrayList<LexemeTable>();
     }
 
     public List<SymbolTable> makeTokens(String sourceLine, int index) {
         if (!sourceLine.equals("")) {
-            List<SymbolTable> tokens = new ArrayList<SymbolTable>();
             String[] lexemes = sourceLine.split(" ");
             String[] splitedLexeme;
             String tmpLexeme;
@@ -104,7 +110,8 @@ public class Automaton {
                                 }
                             }
                             if (!error) {
-                                tokens.add(new Token(Token));
+                                this.tables[0] 
+                                //tokens.add(new Token(Token));
                             }
                         } else if (isCharacter(lexemeSplited.charAt(0))) {
                             tmpLexeme += lexemeSplited.charAt(0);

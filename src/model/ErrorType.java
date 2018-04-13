@@ -19,7 +19,7 @@
  *         https://github.com/alanluz
  * 
  */
-package enumModel;
+package model;
 
 public enum ErrorType {
     INVALID_LEXEME_ERR,
