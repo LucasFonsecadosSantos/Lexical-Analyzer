@@ -21,6 +21,11 @@
  */
 package utils;
 
+import view.GUI;
+import app.SymbolTable;
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * = == > ++ && <= ! - -- + += *
  * 
@@ -63,15 +68,18 @@ public class Automaton {
         };
     }
 
-    public void makeTokens(String sourceLine, int index) {
+    public List<SymbolTable> makeTokens(String sourceLine, int index) {
         if (!sourceLine.equals("")) {
+            List<SymbolTable> tokens = new ArrayList<SymbolTable>();
             String[] lexemes = sourceLine.split(" ");
             String[] splitedLexeme;
             String tmpLexeme;
             Boolean error;
+            
             for (String lexeme : lexemes) {
                 tmpLexeme = "";
                 error = false;
+
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
                     if(isNumber(lexeme.charAt(0))) {
 
@@ -96,7 +104,7 @@ public class Automaton {
                                 }
                             }
                             if (!error) {
-                                //ADICIONA NA TABELA DE SIMBOLO
+                                tokens.add(new Token(Token));
                             }
                         } else if (isCharacter(lexemeSplited.charAt(0))) {
                             tmpLexeme += lexemeSplited.charAt(0);
@@ -120,8 +128,9 @@ public class Automaton {
                     }
                 }
             }
+            return tokens;
         } else {
-            return;
+            return null;
         }
                 
     }

@@ -25,16 +25,21 @@ import enumModel.LexemeType;
 
 public class SymbolTable {
 
-    private int index;
+    private static int index = 0;
     private LexemeType type;
     private String lexeme;
     private String description;
 
-    public SymbolTable(int index, LexemeType type, String lexeme) {
+    public SymbolTable(LexemeType type, String lexeme) {
         setIndex(index);
         setLexemeType(type);
         setLexeme(lexeme);
         setDescription();
+        increaseIndex();
+    }
+
+    public void increaseIndex() {
+        index++;
     }
 
     public void setIndex(int index) {

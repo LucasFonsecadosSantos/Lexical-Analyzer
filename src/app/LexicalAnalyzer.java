@@ -50,6 +50,11 @@ public class LexicalAnalyzer {
     private List<String> sourceCode;
 
     /**
+     * Source code data list attribute
+     */
+    private List<SymbolTable> lexemeTable;
+
+    /**
      * The lexical analyzer object constructor.
      * It sets the automaton attribute instance and 
      * gets source code data from file with FileHandler
@@ -61,6 +66,7 @@ public class LexicalAnalyzer {
         System.out.println(fileName);
         this.sourceCode = FileHandler.getSourceCode(fileName);
         this.automaton = new Automaton();
+        this.lexemeTable = new ArrayList<SymbolTable>();
     }
 
     /**
@@ -73,7 +79,7 @@ public class LexicalAnalyzer {
         int lineIndex = 0;
         for (String line : this.sourceCode) {
             ++lineIndex;
-            this.automaton.makeTokens(line, lineIndex);
+            this.lexemeTable = this.automaton.makeTokens(line, lineIndex);
         }
     }
 
