@@ -31,6 +31,18 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
+ * This represents the most important class at the
+ * current step for the project, the Automaton.
+ * It's a matemathical model that process the source
+ * code by a language grammar described next:
+ * 
+ * @author Lucas Fonseca Dos Santos
+ * @author Igor Augusto da Costa Nunes
+ * @author Alan Luz Silveira
+ * @version 1.0
+ * @since 1.0
+ *
+ *
  * = == > ++ && <= ! - -- + += *
  * 
  * ,.[{()}];
