@@ -121,9 +121,9 @@ public class Automaton {
                                 this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme, new Token(LexemeType.INT_LITERAL, symbol.getIndex())));
                             }
                         } else if (isCharacter(currentSymbol)) {
-                            currentSymbol = lexemeSplited.charAt(0);
                             tmpLexeme += currentSymbol;
-                            for (int i = 1 ; i <= lexemeSplited.length() ; i++) {
+                            for (int i = 1 ; i < lexemeSplited.length() ; i++) {
+                                
                                 currentSymbol = lexemeSplited.charAt(i);
                                 if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                                     tmpLexeme += currentSymbol;
@@ -134,12 +134,14 @@ public class Automaton {
                                 }
                             }
                             if (!error) {
-                                //ADD A TABELA DE SIMBOLO
+                                LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
+                                error = true;
+                                break;
                             }
                         } else if (isOperand(lexemeSplited.charAt(0))) {
-                            
+                            this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme));
                         } else if (isSeparator(lexemeSplited.charAt(0))) {
-                            //adiciona direto a tabela de simbolos
+                            this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme));
                         }
                     }
                 }

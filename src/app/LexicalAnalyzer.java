@@ -84,10 +84,9 @@ public class LexicalAnalyzer {
             ++lineIndex;
             this.lexicalTables.add(this.automaton.makeTokens(line, lineIndex));
         }
-
-        for (int i=0; i<lexicalTables.size(); i++) {
-            System.out.println(this.lexicalTables.get(i)[SYMBOL_TABLE].get(0).hashCode());
-        }
+        List<LexemeTable> list = (ArrayList<LexemeTable>) this.lexicalTables.get(0)[1];
+        System.out.println(list);
+        
     }
 
 

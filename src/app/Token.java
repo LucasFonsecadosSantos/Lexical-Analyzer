@@ -19,4 +19,8 @@ public class Token {
     public void setIndex(int index) {
         this.symbolTableIndex = index;
     }
+
+    public int getSymbolTableIndex() {
+        return this.symbolTableIndex;
+    }
 }
