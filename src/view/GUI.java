@@ -413,4 +413,12 @@ public class GUI {
     public static void printActionMessage(String message) {
         System.out.println(WHITE_BRIGHT + "[..] " + message + ".");
     }
+
+    /**
+     * This method cleans the console with a string.
+     */
+    public static void clear() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    }
 }

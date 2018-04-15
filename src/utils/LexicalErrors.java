@@ -20,7 +20,7 @@
  * 
  */
 package utils;
-
+import java.util.Map;
 import java.util.LinkedHashMap;
 import model.ErrorType;
 
@@ -31,5 +31,9 @@ public class LexicalErrors {
 
     public static void addError(ErrorType type, int lineNumber) {
         errorsList.put(type, lineNumber);
+    }
+
+    public static Map<ErrorType, Integer> getErrors() {
+        return errorsList;
     }
 }

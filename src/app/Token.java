@@ -23,4 +23,8 @@ public class Token {
     public int getSymbolTableIndex() {
         return this.symbolTableIndex;
     }
+
+    public LexemeType getLexemeClass() {
+        return this.lexemeClass;
+    }
 }

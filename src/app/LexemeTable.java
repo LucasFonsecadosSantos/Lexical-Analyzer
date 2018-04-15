@@ -22,7 +22,4 @@ public class LexemeTable extends LexicalTablesInterface {
         return this.token;
     }
 
-    public String kk () {
-        return "x";
-    }
 }

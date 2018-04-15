@@ -20,9 +20,17 @@
  * 
  */
 package app;
-
+import app.LexemeTable;
 import dao.FileHandler;
+import utils.LexicalErrors;
+import view.GUI;
+import model.ErrorType;
 import utils.Automaton;
+import java.util.Map;
+
+
+
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -53,9 +61,11 @@ public class LexicalAnalyzer {
      * Source code data list attribute
      */
     private List<List[]> lexicalTables;
+    private List<LexemeTable> lexemeTable;
+    private List<SymbolTable> symbolTable;
 
     private final int SYMBOL_TABLE = 0;
-    private final int LEXEME_TABLE = 0;
+    private final int LEXEME_TABLE = 1;
 
     /**
      * The lexical analyzer object constructor.
@@ -66,7 +76,8 @@ public class LexicalAnalyzer {
      * @param fileName The file name string from Main, receid by args from user.
      */
     public LexicalAnalyzer(String fileName) {
-        System.out.println(fileName);
+        GUI.clear();
+        GUI.printActionMessage("Compiling the " + fileName + " code.");
         this.sourceCode = FileHandler.getSourceCode(fileName);
         this.automaton = new Automaton();
         this.lexicalTables = new ArrayList<List[]>();
@@ -84,9 +95,24 @@ public class LexicalAnalyzer {
             ++lineIndex;
             this.lexicalTables.add(this.automaton.makeTokens(line, lineIndex));
         }
-        List<LexemeTable> list = (ArrayList<LexemeTable>) this.lexicalTables.get(0)[1];
-        System.out.println(list);
+        //List<LexemeTable> list = (ArrayList<LexemeTable>) this.lexicalTables.get(0)[1].getClass();
+        //LexemeTable lt = this.lexicalTables;
         
+        this.lexemeTable = (ArrayList<LexemeTable>) this.lexicalTables.get(0)[LEXEME_TABLE];
+        this.symbolTable = (ArrayList<SymbolTable>) this.lexicalTables.get(0)[SYMBOL_TABLE];
+        
+        Map<ErrorType, Integer> errors = LexicalErrors.getErrors();
+
+        for(Map.Entry<ErrorType, Integer> error : errors.entrySet()) {
+            GUI.printErrorMessage(error.getKey().toString(), String.valueOf(error.getValue()));
+        }
+        //percorrendo todas as linhas da tabela de lexema
+        /*for (LexemeTable lt : this.lexicalTables) {
+
+        }
+        for (LexemeTable kkk : this.lexemeTable) {
+            System.out.println(kkk.getLexeme());
+        }*/
     }
 
 
