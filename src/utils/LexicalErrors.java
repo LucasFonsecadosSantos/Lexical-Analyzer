@@ -26,14 +26,18 @@ import model.ErrorType;
 
 public class LexicalErrors {
     
-    private static LinkedHashMap<ErrorType, Integer> errorsList = new LinkedHashMap<ErrorType, Integer>();
+    private Map<ErrorType, Integer> errorsList = new LinkedHashMap<ErrorType, Integer>();
     protected static ErrorType type;
 
-    public static void addError(ErrorType type, int lineNumber) {
-        errorsList.put(type, lineNumber);
+    public LexicalErrors() {
+        this.errorsList = new LinkedHashMap<ErrorType, Integer>();
     }
 
-    public static Map<ErrorType, Integer> getErrors() {
-        return errorsList;
+    public void addError(ErrorType type, int lineNumber) {
+        this.errorsList.put(type, lineNumber);
+    }
+
+    public Map<ErrorType, Integer> getErrors() {
+        return this.errorsList;
     }
 }

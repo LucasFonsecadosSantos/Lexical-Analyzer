@@ -23,8 +23,9 @@ package app;
 
 import model.LexemeType;
 
-public class SymbolTable extends LexicalTablesInterface {
+public class SymbolTable {
 
+    private String lexeme;
     private static int index = 0;
     protected static LexemeType type;
     private String description;
@@ -37,6 +38,14 @@ public class SymbolTable extends LexicalTablesInterface {
         increaseIndex();
     }
 
+    public String getLexeme() {
+        return this.lexeme;
+    }
+
+    public void setLexeme(String lexeme) {
+        this.lexeme = lexeme;
+    }
+        
     public int getIndex() {
         return index;
     }

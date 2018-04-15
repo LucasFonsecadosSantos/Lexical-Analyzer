@@ -1,8 +1,9 @@
 package app;
 
-public class LexemeTable extends LexicalTablesInterface {
+public class LexemeTable {
 
     private Token token;
+    private String lexeme;
     
     public LexemeTable(String lexeme ,Token token) {
         setLexeme(lexeme);
@@ -22,4 +23,11 @@ public class LexemeTable extends LexicalTablesInterface {
         return this.token;
     }
 
+    public String getLexeme() {
+        return this.lexeme;
+    }
+
+    public void setLexeme(String lexeme) {
+        this.lexeme = lexeme;
+    }
 }

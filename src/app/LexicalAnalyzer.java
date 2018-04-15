@@ -63,9 +63,8 @@ public class LexicalAnalyzer {
     private List<List[]> lexicalTables;
     private List<LexemeTable> lexemeTable;
     private List<SymbolTable> symbolTable;
-
-    private final int SYMBOL_TABLE = 0;
-    private final int LEXEME_TABLE = 1;
+    private List<LexicalResults> results;
+    private Map<ErrorType, Integer> error;
 
     /**
      * The lexical analyzer object constructor.
@@ -80,7 +79,9 @@ public class LexicalAnalyzer {
         GUI.printActionMessage("Compiling the " + fileName + " code.");
         this.sourceCode = FileHandler.getSourceCode(fileName);
         this.automaton = new Automaton();
-        this.lexicalTables = new ArrayList<List[]>();
+        this.lexemeTable = new ArrayList<LexemeTable>();
+        this.symbolTable = new ArrayList<SymbolTable>();
+        this.results = new ArrayList<LexicalResults>();
     }
 
     /**
@@ -93,26 +94,35 @@ public class LexicalAnalyzer {
         int lineIndex = 0;
         for (String line : this.sourceCode) {
             ++lineIndex;
-            this.lexicalTables.add(this.automaton.makeTokens(line, lineIndex));
+            this.results.add(this.automaton.makeTokens(line, lineIndex));
         }
-        //List<LexemeTable> list = (ArrayList<LexemeTable>) this.lexicalTables.get(0)[1].getClass();
-        //LexemeTable lt = this.lexicalTables;
-        
-        this.lexemeTable = (ArrayList<LexemeTable>) this.lexicalTables.get(0)[LEXEME_TABLE];
-        this.symbolTable = (ArrayList<SymbolTable>) this.lexicalTables.get(0)[SYMBOL_TABLE];
-        
-        Map<ErrorType, Integer> errors = LexicalErrors.getErrors();
+        populateTables();
+        System.out.println(this.lexemeTable.size());
+        for (LexemeTable lt : this.lexemeTable) {
+            if (lt != null) {
+                if (lt.getToken() != null)
+                    GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
+            }
+        }
+        for (Map.Entry<ErrorType,Integer> pair : this.error.entrySet()) {
+            GUI.printErrorMessage(pair.getKey().toString(), String.valueOf(pair.getValue()));
+        }
+    }
 
-        for(Map.Entry<ErrorType, Integer> error : errors.entrySet()) {
-            GUI.printErrorMessage(error.getKey().toString(), String.valueOf(error.getValue()));
+    private void populateTables() {
+        for (LexicalResults results : this.results) {
+            if (results != null) {
+                for (LexemeTable lexemeTable : results.getLexemeTable()) {
+                    this.lexemeTable.add(lexemeTable);
+                }
+                for (SymbolTable symbolTable : results.getSymbolTable()) {
+                    this.symbolTable.add(symbolTable);
+                }
+                this.error = results.getErrors();
+            } else {
+                continue;
+            }
         }
-        //percorrendo todas as linhas da tabela de lexema
-        /*for (LexemeTable lt : this.lexicalTables) {
-
-        }
-        for (LexemeTable kkk : this.lexemeTable) {
-            System.out.println(kkk.getLexeme());
-        }*/
     }
 
 

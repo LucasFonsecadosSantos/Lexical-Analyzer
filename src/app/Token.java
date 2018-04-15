@@ -12,6 +12,11 @@ public class Token {
         setIndex(symbolTableIndex);
     }
 
+    public Token(int index) {
+        setLexemeClass(null);
+        setIndex(index);
+    }
+
     public void setLexemeClass(LexemeType lexemeClass) {
         this.lexemeClass = lexemeClass;
     }

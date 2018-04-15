@@ -24,9 +24,10 @@ package utils;
 import view.GUI;
 import app.SymbolTable;
 import model.LexemeType;
+import utils.LexicalErrors;
 import app.LexemeTable;
+import app.LexicalResults;
 import app.Token;
-import app.LexicalTablesInterface;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -59,11 +60,11 @@ public class Automaton {
 
     private String[] reservedWords;
     private String[] operators;
+    private LexicalErrors lexicalErrors;
     private char[] separators;
     private char[] numbers;
-    private List[] tables;
-    private static final int SYMBOL_TABLE = 0;
-    private static final int LEXICAL_TABLE = 1; 
+    private LexicalResults lexicalResults;
+    private static int currentLexeme;
 
     public Automaton() {
         this.numbers = new char[] {
@@ -85,12 +86,11 @@ public class Automaton {
         this.separators = new char[] {
             ',', '.', '[', '{', '(', ')', '}', ']',';'
         };
-        this.tables = new List[2];
-        this.tables[0] = new ArrayList<SymbolTable>();
-        this.tables[1] = new ArrayList<LexemeTable>();
+        this.lexicalResults = new LexicalResults();
+        currentLexeme =0;
     }
 
-    public List[] makeTokens(String sourceLine, int index) {
+    public LexicalResults makeTokens(String sourceLine, int index) {
         if (!sourceLine.equals("")) {
             String[] lexemes = sourceLine.split(" ");
             String[] splitedLexeme;
@@ -104,6 +104,7 @@ public class Automaton {
                 if(lexeme.equals("")) continue;
                 //System.out.println(lexeme);
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
+                    currentLexeme++;
                     if(lexeme.equals("")) continue;
                     currentSymbol = lexeme.charAt(0);
                     if (isNumber(currentSymbol)) {
@@ -113,7 +114,7 @@ public class Automaton {
                             if (isNumber(currentSymbol)) {
                                 tmpLexeme += currentSymbol;
                             } else {
-                                LexicalErrors.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index);
+                                this.lexicalResults.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index);
                                 error = true;
                                 break;
                             }
@@ -121,8 +122,8 @@ public class Automaton {
                         if (!error) {
                             //FOUND A NUMBER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
                             SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme);
-                            this.tables[SYMBOL_TABLE].add(symbol); 
-                            this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme, new Token(LexemeType.INT_LITERAL, symbol.getIndex())));
+                            this.lexicalResults.addSymbolTable(symbol); 
+                            this.lexicalResults.addLexemeTable(new LexemeTable(tmpLexeme, new Token(LexemeType.INT_LITERAL, symbol.getIndex())));
                         }
                     } else if (isCharacter(currentSymbol)) {
                         tmpLexeme += currentSymbol;
@@ -131,15 +132,15 @@ public class Automaton {
                             if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                                 tmpLexeme += currentSymbol;
                             } else {
-                                LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
+                                this.lexicalResults.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
                                 error = true;
                                 break;
                             }
                         }
                         if (!error) {
                             SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme);
-                            this.tables[SYMBOL_TABLE].add(symbol); 
-                            this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme, new Token(LexemeType.IDENTIFIER, symbol.getIndex())));
+                            this.lexicalResults.addSymbolTable(symbol); 
+                            this.lexicalResults.addLexemeTable(new LexemeTable(tmpLexeme, new Token(LexemeType.IDENTIFIER, symbol.getIndex())));
                         } 
                     }
                     
@@ -149,6 +150,7 @@ public class Automaton {
                         System.out.println(s);
                     }*/
                     for (String lexemeSplited : splitedLexeme) {
+                        currentLexeme++;
                         tmpLexeme = "";
                         if(lexemeSplited.equals("")) continue;
                         currentSymbol = lexemeSplited.charAt(0);
@@ -159,7 +161,7 @@ public class Automaton {
                                 if (isNumber(currentSymbol)) {
                                     tmpLexeme += currentSymbol;
                                 } else {
-                                    LexicalErrors.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index);
+                                    this.lexicalResults.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index);
                                     error = true;
                                     break;
                                 }
@@ -167,8 +169,8 @@ public class Automaton {
                             if (!error) {
                                 //FOUND A NUMBER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
                                 SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme);
-                                this.tables[SYMBOL_TABLE].add(symbol); 
-                                this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme, new Token(LexemeType.INT_LITERAL, symbol.getIndex())));
+                                this.lexicalResults.addSymbolTable(symbol); 
+                                this.lexicalResults.addLexemeTable(new LexemeTable(tmpLexeme, new Token(LexemeType.INT_LITERAL, symbol.getIndex())));
                             }
                         } else if (isCharacter(currentSymbol)) {
                             tmpLexeme += currentSymbol;
@@ -178,7 +180,7 @@ public class Automaton {
                                 if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                                     tmpLexeme += currentSymbol;
                                 } else {
-                                    LexicalErrors.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
+                                    this.lexicalResults.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
                                     error = true;
                                     break;
                                 }
@@ -186,18 +188,20 @@ public class Automaton {
                             if (!error) {
                                 //FOUND A IDENTIFIER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
                                 SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme);
-                                this.tables[SYMBOL_TABLE].add(symbol); 
-                                this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme, new Token(LexemeType.IDENTIFIER, symbol.getIndex())));
+                                this.lexicalResults.addSymbolTable(symbol); 
+                                this.lexicalResults.addLexemeTable(new LexemeTable(tmpLexeme, new Token(LexemeType.IDENTIFIER, symbol.getIndex())));
                             }
                         } else if (isOperand(lexemeSplited.charAt(0))) {
-                            this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme));
+                            tmpLexeme += lexemeSplited.charAt(0);
+                            this.lexicalResults.addLexemeTable(new LexemeTable(tmpLexeme, new Token(currentLexeme)));
                         } else if (isSeparator(lexemeSplited.charAt(0))) {
-                            this.tables[LEXICAL_TABLE].add(new LexemeTable(tmpLexeme));
+                            tmpLexeme += lexemeSplited.charAt(0);
+                            this.lexicalResults.addLexemeTable(new LexemeTable(tmpLexeme, new Token(currentLexeme)));
                         }
                     }
                 }
             }
-            return this.tables;
+            return this.lexicalResults;
         } else {
             return null;
         }
