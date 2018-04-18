@@ -2,10 +2,11 @@
 package app;
 
 import model.ErrorType;
+import model.LexemeType;
+import utils.LexicalErrors;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
-import utils.LexicalErrors;
 
 public class LexicalResults {
     
@@ -27,6 +28,14 @@ public class LexicalResults {
     public void addToLexemeTable(LexemeTable lexemeTable) {
         addLexemeTable(lexemeTable);
         addSymbolTable(null);
+    }
+
+    public void addLexemeTable(String lexeme, LexemeType lexemeClass, int symbolTableIndex) {
+        if (lexemeClass == LexemeType.OPERATOR || lexemeClass == LexemeType.SEPARATOR) {
+            this.lexemeTable.add(new LexemeTable(lexeme, new Token(symbolTableIndex)));
+        } else {
+            this.lexemeTable.add(new LexemeTable(lexeme, new Token(lexemeClass, symbolTableIndex)));
+        }
     }
 
     public void addLexemeTable(LexemeTable lexemeTable) {

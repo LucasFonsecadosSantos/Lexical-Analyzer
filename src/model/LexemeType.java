@@ -25,5 +25,7 @@ public enum LexemeType {
     IDENTIFIER,
     CHAR_LITERAL,
     INT_LITERAL,
+    OPERATOR,
+    SEPARATOR,
     STRING_LITERAL;
 }
