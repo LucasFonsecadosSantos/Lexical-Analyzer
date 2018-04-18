@@ -26,18 +26,69 @@ import model.ErrorType;
 
 public class LexicalErrors {
     
-    private Map<ErrorType, Integer> errorsList = new LinkedHashMap<ErrorType, Integer>();
+    private int lineNumber;
+    private int columnNumber;
+    private String description;
     protected static ErrorType type;
 
-    public LexicalErrors() {
-        this.errorsList = new LinkedHashMap<ErrorType, Integer>();
+    public LexicalErrors(ErrorType type, int lineNumber, int columnNumber) {
+        setType(type);
+        setLineNumber(lineNumber);
+        setColumnNumber(columnNumber);
+        setDescription(type);
     }
 
-    public void addError(ErrorType type, int lineNumber) {
-        this.errorsList.put(type, lineNumber);
+    public String getDescription() {
+        return this.description;
     }
 
-    public Map<ErrorType, Integer> getErrors() {
-        return this.errorsList;
+    public ErrorType getType() {
+        return this.type;
+    }
+
+    public int getLine() {
+        return this.lineNumber;
+    }
+
+    public int getColumn() {
+        return this.columnNumber;
+    }
+
+    private void setType(ErrorType type) {
+        this.type = type;
+    }
+
+    private void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
+    private void setColumnNumber(int columnNumber) {
+        this.columnNumber = columnNumber;
+    }
+
+    private void setDescription(ErrorType type) {
+        switch(type) {
+            case INVALID_LEXEME_ERR:
+                this.description = "You have a " 
+                + "invalid identifier or reservated"
+                + "word. Please, you must fix this to"
+                + "contninue";
+                break;
+            case INVALID_OPERAND_ERR:
+                this.description = "You have a " 
+                + "invalid operator Please, you"
+                + "must fix this to contninue";
+                break;
+            case INVALID_CHARACTER_ERR:
+                this.description = "You have a " 
+                + "invalid character. Please, "
+                + "you must fix this to contninue";
+                break;
+            case INVALID_NUMBER_ERR:
+                this.description = "You have a " 
+                + "invalid number. Please, you"
+                + "must fix this to contninue";
+                break;
+        }
     }
 }

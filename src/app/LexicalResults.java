@@ -1,3 +1,4 @@
+
 package app;
 
 import model.ErrorType;
@@ -10,12 +11,12 @@ public class LexicalResults {
     
     private List<LexemeTable> lexemeTable;
     private List<SymbolTable> symbolTable;
-    private LexicalErrors lexicalErrors;
+    private List<LexicalErrors> errors;
 
     public LexicalResults() {
         this.lexemeTable = new ArrayList<LexemeTable>();
         this.symbolTable = new ArrayList<SymbolTable>();
-        this.lexicalErrors = new LexicalErrors();
+        this.errors = new ArrayList<LexicalErrors>();
     }
 
     public void addToLexemeTable(LexemeTable lexemeTable, SymbolTable symbolTable) {
@@ -36,8 +37,8 @@ public class LexicalResults {
         this.symbolTable.add(symbolTable);
     }
 
-    public void addError(ErrorType type, int lineNumber) {
-        this.lexicalErrors.addError(type, lineNumber);
+    public void addError(ErrorType type, int lineNumber, int columnNumber) {
+        this.errors.add(new LexicalErrors(type, lineNumber, columnNumber));
     }
 
     public List<LexemeTable> getLexemeTable() {
@@ -48,7 +49,7 @@ public class LexicalResults {
         return this.symbolTable;
     }
 
-    public Map<ErrorType, Integer> getErrors() {
-        return this.lexicalErrors.getErrors();
+    public List<LexicalErrors> getErrors() {
+        return this.errors;
     }
 }

@@ -63,8 +63,8 @@ public class LexicalAnalyzer {
     private List<List[]> lexicalTables;
     private List<LexemeTable> lexemeTable;
     private List<SymbolTable> symbolTable;
+    private List<LexicalErrors> errors;
     private List<LexicalResults> results;
-    private Map<ErrorType, Integer> error;
 
     /**
      * The lexical analyzer object constructor.
@@ -82,6 +82,7 @@ public class LexicalAnalyzer {
         this.lexemeTable = new ArrayList<LexemeTable>();
         this.symbolTable = new ArrayList<SymbolTable>();
         this.results = new ArrayList<LexicalResults>();
+        this.errors = new ArrayList<LexicalErrors>();
     }
 
     /**
@@ -104,8 +105,10 @@ public class LexicalAnalyzer {
                     GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
             }
         }
-        for (Map.Entry<ErrorType,Integer> pair : this.error.entrySet()) {
-            GUI.printErrorMessage(pair.getKey().toString(), String.valueOf(pair.getValue()));
+        for (LexicalErrors le : this.errors) {
+            GUI.printErrorMessage(le.getType().toString(),
+                "(" + le.getLine() + "," + le.getColumn() 
+                + ") " + le.getDescription());
         }
     }
 
@@ -118,7 +121,7 @@ public class LexicalAnalyzer {
                 for (SymbolTable symbolTable : results.getSymbolTable()) {
                     this.symbolTable.add(symbolTable);
                 }
-                this.error = results.getErrors();
+                this.errors = results.getErrors();
             } else {
                 continue;
             }

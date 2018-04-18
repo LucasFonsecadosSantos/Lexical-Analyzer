@@ -60,7 +60,6 @@ public class Automaton {
 
     private String[] reservedWords;
     private String[] operators;
-    private LexicalErrors lexicalErrors;
     private char[] separators;
     private char[] numbers;
     private LexicalResults lexicalResults;
@@ -114,7 +113,7 @@ public class Automaton {
                             if (isNumber(currentSymbol)) {
                                 tmpLexeme += currentSymbol;
                             } else {
-                                this.lexicalResults.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index);
+                                this.lexicalResults.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index, i);
                                 error = true;
                                 break;
                             }
@@ -132,7 +131,7 @@ public class Automaton {
                             if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                                 tmpLexeme += currentSymbol;
                             } else {
-                                this.lexicalResults.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
+                                this.lexicalResults.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index, i);
                                 error = true;
                                 break;
                             }
@@ -161,7 +160,7 @@ public class Automaton {
                                 if (isNumber(currentSymbol)) {
                                     tmpLexeme += currentSymbol;
                                 } else {
-                                    this.lexicalResults.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index);
+                                    this.lexicalResults.addError(LexicalErrors.type.INVALID_NUMBER_ERR ,index, i);
                                     error = true;
                                     break;
                                 }
@@ -180,7 +179,7 @@ public class Automaton {
                                 if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                                     tmpLexeme += currentSymbol;
                                 } else {
-                                    this.lexicalResults.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index);
+                                    this.lexicalResults.addError(LexicalErrors.type.INVALID_LEXEME_ERR ,index, i);
                                     error = true;
                                     break;
                                 }
