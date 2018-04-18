@@ -22,9 +22,9 @@
 package utils;
 
 import view.GUI;
-import app.SymbolTable;
 import model.LexemeType;
 import utils.LexicalErrors;
+import app.SymbolTable;
 import app.LexemeTable;
 import app.LexicalResults;
 import app.Token;
@@ -58,13 +58,58 @@ import java.util.ArrayList;
  */
 public class Automaton {
 
+    /**
+     * Language Reserved words array attribute.
+     * All words contained here is specificated by
+     * language grammar.
+     */
     private String[] reservedWords;
+    
+    /**
+     * Language operators array attribute.
+     * All operators contained here is specificated by
+     * language grammar.
+     */
     private String[] operators;
+
+    /**
+     * Language separators array attribute.
+     * All separators contained here is specificated by
+     * language grammar.
+     */
     private char[] separators;
+
+    /**
+     * Language numbers array attribute.
+     * All numbers contained here is specificated by
+     * language grammar.
+     */
     private char[] numbers;
+
+    /**
+     * A lexical analyze results by automaton
+     * process verification attribute.
+     * This object contains all information
+     * collected by source code as Lexemes, errors
+     * and symbols.
+     */
     private LexicalResults lexicalResults;
+
+    /**
+     * Current lexeme attribute.
+     */
     private static int currentLexeme;
 
+    /**
+     * The automaton object constructor.
+     * It sets the following attributes:
+     * - numbers as char array with your symbols.
+     * - reservedWords as String array with your symbols.
+     * - operators as String array with your symbols.
+     * - separators as String with your symbols.
+     * and after that, sets the lexicalResults as a new
+     * object.
+     */
     public Automaton() {
         this.numbers = new char[] {
             '0', '1', '2', '3', '4', '5',
@@ -207,6 +252,16 @@ public class Automaton {
                 
     }
 
+    /**
+     * This private method splits by special characteres defined by language grammar
+     * a lexeme line and return it.
+     * The split operation is based by a regex function. If any symbol is located by
+     * regex function, the method writes # symbol after and before the special character,
+     * and after that, splits the line by # symbol.
+     * 
+     * @return String[] A string array with all lexemes splited by special characteres.
+     * @param lexeme String lexeme that will be splited.
+     */
     private String[] sliptBySpecialCharacteres(String lexeme) {
         for (char separator : this.separators) {
             for (String operand : this.operators) {
@@ -216,17 +271,26 @@ public class Automaton {
             }
         }
         return null;
-    
     }
 
+    /**
+     * This private method verifys if a character is ou isn't a valid character
+     * defined by language grammar.
+     * 
+     * @return Boolean A condition that indicates if the symbol is or isn't a character.
+     * @param character A symbol will be verificate if the symbol is or isn't a character.
+     */
     private Boolean isCharacter(char character) {
-        if (Character.isLetter(character)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (Character.isLetter(character));
     } 
 
+    /**
+     * This method verifys if the character is a valid operator by the conditions
+     * expressed by language grammar.
+     * 
+     * @param operand A character that will be avaliated if it's operator.
+     * @return Boolean True if the character is operator by language grammar definitions.
+     */
     private Boolean isOperand(char operand) {
         String operandStr = String.valueOf(operand);
         for (String operator : this.operators) {
@@ -237,6 +301,13 @@ public class Automaton {
         return false;
     }
 
+    /**
+     * This private method will avaliated if a character is or isn't a valid separtor
+     * by language grammar definitions.
+     * 
+     * @param separatorChar A character that will be avaliated if it's a separator char by language grammar definitions.
+     * @return Boolean True if the character is a separator by language grammar definitions.
+     */
     private Boolean isSeparator(char separatorChar) {
         for (char separator : this.separators) {
             if (separatorChar == separator) {
@@ -246,6 +317,13 @@ public class Automaton {
         return false;
     }
 
+    /**
+     * This private method returns if the lexeme is a valid number
+     * by language grammar specifications.
+     * 
+     * @return Boolean True if the lexeme is a valid number by language grammar.
+     * @param Lexeme A lexeme that will be avaliated if it's a valid number by language grammar specifications.
+     */
     private Boolean isNumber(char lexeme) {
         for (char number : this.numbers) {
             if (lexeme == number) {
