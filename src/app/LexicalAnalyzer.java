@@ -111,21 +111,22 @@ public class LexicalAnalyzer {
         int lineIndex = 0;
         for (String line : this.sourceCode) {
             ++lineIndex;
-            this.results.add(this.automaton.makeTokens(line, lineIndex));
+            LexicalResults result = this.automaton.makeTokens(line, lineIndex);
+            if (result != null) {
+                this.results.add(result);
+                System.out.println(this.results);
+            }
         }
         populateTables();
-        System.out.println(this.lexemeTable.size());
-        /*for (LexemeTable lt : this.lexemeTable) {
-            /*if (lt != null) {
-                if (lt.getToken() != null)
-                    GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
-            
+        for (LexemeTable lt : this.lexemeTable) {
+            GUI.printInformationMessage(lt.getLexegitme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
+        
         }
         for (LexicalErrors le : this.errors) {
             GUI.printErrorMessage(le.getType().toString(),
                 "(" + le.getLine() + "," + le.getColumn() 
                 + ") " + le.getDescription());
-        } */
+        } 
     }
 
     /**
@@ -136,18 +137,11 @@ public class LexicalAnalyzer {
      * errors array.
      */
     private void populateTables() {
+        System.out.println(this.results.size());
         for (LexicalResults results : this.results) {
-            if (results != null) {
-                for (LexemeTable lexemeTable : results.getLexemeTable()) {
-                    this.lexemeTable.add(lexemeTable);
-                }
-                for (SymbolTable symbolTable : results.getSymbolTable()) {
-                    this.symbolTable.add(symbolTable);
-                }
-                this.errors = results.getErrors();
-            } else {
-                continue;
-            }
+            this.lexemeTable = results.getLexemeTable();
+            this.symbolTable = results.getSymbolTable();
+            this.errors = results.getErrors();
         }
     }
 
