@@ -13,6 +13,7 @@
  * Lucas Fonseca dos Santos    [201712078]
  * Igor Augusto da Costa Nunes [201420447]
  * Alan Luz Silveira           [201420...]
+ * Igor Emanuel
  * 
  * GITHUB: https://github.com/LucasFonsecadosSantos
  *         https://github.com/Inuness
@@ -38,6 +39,7 @@ import java.util.ArrayList;
  * @author Lucas Fonseca Dos Santos
  * @author Igor Augusto da Costa Nunes
  * @author Alan Luz Silveira
+ * @author Igor Emanuel Carvalho da Cruz
  * @version 1.0
  * @since 1.0
  *
@@ -180,9 +182,13 @@ public class Automaton {
                             }
                         }
                         if (!error) {
-                            SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme);
-                            this.lexicalResults.addSymbolTable(symbol); 
-                            this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, symbol.getIndex());
+                            if (isReservedWord(tmpLexeme)) {
+                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.RESERVED_SYMBOL, currentLexeme);
+                            } else {
+                                SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme);
+                                this.lexicalResults.addSymbolTable(symbol); 
+                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, symbol.getIndex());
+                            }
                         } 
                     }
                     
@@ -229,9 +235,13 @@ public class Automaton {
                             }
                             if (!error) {
                                 //FOUND A IDENTIFIER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
-                                SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme);
-                                this.lexicalResults.addSymbolTable(symbol); 
-                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, symbol.getIndex());
+                                if (isReservedWord(tmpLexeme)) {
+                                    this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.RESERVED_SYMBOL, currentLexeme);
+                                } else {
+                                    SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme);
+                                    this.lexicalResults.addSymbolTable(symbol); 
+                                    this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, symbol.getIndex());
+                                }
                             }
                         } else if (isOperand(lexemeSplited.charAt(0))) {
                             tmpLexeme += lexemeSplited.charAt(0);
@@ -248,6 +258,15 @@ public class Automaton {
             return null;
         }
                 
+    }
+
+    private Boolean isReservedWord(String identifier) {
+        for (String symbol : this.reservedWords) {
+            if (identifier.equals(symbol)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

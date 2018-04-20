@@ -23,6 +23,7 @@ package model;
 
 public enum LexemeType {
     IDENTIFIER,
+    RESERVED_SYMBOL,
     CHAR_LITERAL,
     INT_LITERAL,
     OPERATOR,
