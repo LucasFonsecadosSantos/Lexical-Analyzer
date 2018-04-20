@@ -26,16 +26,16 @@ import model.LexemeType;
 public class SymbolTable {
 
     private String lexeme;
-    private static int index = 0;
+    private int index = 0;
     protected static LexemeType type;
     private String description;
 
-    public SymbolTable(LexemeType type, String lexeme) {
+    public SymbolTable(LexemeType type, String lexeme, int index) {
         setIndex(index);
         setLexemeType(type);
         setLexeme(lexeme);
         setDescription();
-        increaseIndex();
+        setIndex(index);
     }
 
     public String getLexeme() {
@@ -47,11 +47,7 @@ public class SymbolTable {
     }
         
     public int getIndex() {
-        return index;
-    }
-
-    public void increaseIndex() {
-        index++;
+        return this.index;
     }
 
     public void setIndex(int index) {

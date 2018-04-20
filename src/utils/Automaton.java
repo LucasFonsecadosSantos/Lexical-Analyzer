@@ -98,7 +98,9 @@ public class Automaton {
     /**
      * Current lexeme attribute.
      */
-    private static int currentLexeme;
+    private int currentLexeme;
+
+    private Boolean errorState;
 
     /**
      * The automaton object constructor.
@@ -146,9 +148,9 @@ public class Automaton {
                 tmpLexeme = "";
                 error = false;
                 if(lexeme.equals("")) continue;
+                
                 //System.out.println(lexeme);
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
-                    currentLexeme++;
                     if(lexeme.equals("")) continue;
                     currentSymbol = lexeme.charAt(0);
                     if (isNumber(currentSymbol)) {
@@ -158,16 +160,20 @@ public class Automaton {
                             if (isNumber(currentSymbol)) {
                                 tmpLexeme += currentSymbol;
                             } else {
-                                this.lexicalResults.addError(ErrorType.INVALID_NUMBER_ERR ,index, i);
+                                this.lexicalResults.addError(ErrorType.INVALID_NUMBER_ERR ,index, i+1);
                                 error = true;
                                 break;
                             }
                         }
                         if (!error) {
                             //FOUND A NUMBER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
-                            SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme);
+                            ++currentLexeme;
+                            SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme, currentLexeme);
+                            System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
                             this.lexicalResults.addSymbolTable(symbol); 
-                            this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.INT_LITERAL, symbol.getIndex());
+                            this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.INT_LITERAL, currentLexeme);
+                        } else {
+                            break;
                         }
                     } else if (isCharacter(currentSymbol)) {
                         tmpLexeme += currentSymbol;
@@ -176,19 +182,23 @@ public class Automaton {
                             if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                                 tmpLexeme += currentSymbol;
                             } else {
-                                this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, i);
+                                this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, i+1);
                                 error = true;
                                 break;
                             }
                         }
                         if (!error) {
+                            ++currentLexeme;
                             if (isReservedWord(tmpLexeme)) {
                                 this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.RESERVED_SYMBOL, currentLexeme);
                             } else {
-                                SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme);
+                                SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme, currentLexeme);
                                 this.lexicalResults.addSymbolTable(symbol); 
-                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, symbol.getIndex());
+                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, currentLexeme);
                             }
+                            System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
+                        } else {
+                            break;
                         } 
                     }
                     
@@ -198,7 +208,6 @@ public class Automaton {
                         System.out.println(s);
                     }*/
                     for (String lexemeSplited : splitedLexeme) {
-                        currentLexeme++;
                         tmpLexeme = "";
                         if(lexemeSplited.equals("")) continue;
                         currentSymbol = lexemeSplited.charAt(0);
@@ -209,16 +218,20 @@ public class Automaton {
                                 if (isNumber(currentSymbol)) {
                                     tmpLexeme += currentSymbol;
                                 } else {
-                                    this.lexicalResults.addError(ErrorType.INVALID_NUMBER_ERR ,index, i);
+                                    this.lexicalResults.addError(ErrorType.INVALID_NUMBER_ERR ,index, i+1);
                                     error = true;
                                     break;
                                 }
                             }
                             if (!error) {
                                 //FOUND A NUMBER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
-                                SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme);
+                                ++currentLexeme;
+                                SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme, currentLexeme);
+                                System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
                                 this.lexicalResults.addSymbolTable(symbol); 
-                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.INT_LITERAL, symbol.getIndex());
+                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.INT_LITERAL, currentLexeme);
+                            } else {
+                                break;
                             }
                         } else if (isCharacter(currentSymbol)) {
                             tmpLexeme += currentSymbol;
@@ -228,27 +241,35 @@ public class Automaton {
                                 if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                                     tmpLexeme += currentSymbol;
                                 } else {
-                                    this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, i);
+                                    this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, i+1);
                                     error = true;
                                     break;
                                 }
                             }
                             if (!error) {
                                 //FOUND A IDENTIFIER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
+                                ++currentLexeme;
                                 if (isReservedWord(tmpLexeme)) {
                                     this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.RESERVED_SYMBOL, currentLexeme);
                                 } else {
-                                    SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme);
+                                    SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme, currentLexeme);
                                     this.lexicalResults.addSymbolTable(symbol); 
-                                    this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, symbol.getIndex());
+                                    this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, currentLexeme);
+                                    System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
                                 }
+                            } else {
+                                break;
                             }
                         } else if (isOperand(lexemeSplited.charAt(0))) {
+                            ++currentLexeme;
                             tmpLexeme += lexemeSplited.charAt(0);
                             this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.OPERATOR, currentLexeme);
+                            System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
                         } else if (isSeparator(lexemeSplited.charAt(0))) {
+                            ++currentLexeme;
                             tmpLexeme += lexemeSplited.charAt(0);
                             this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.SEPARATOR, currentLexeme);
+                            System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
                         }
                     }
                 }

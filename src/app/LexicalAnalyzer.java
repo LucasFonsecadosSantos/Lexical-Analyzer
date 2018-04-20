@@ -115,17 +115,17 @@ public class LexicalAnalyzer {
         }
         populateTables();
         System.out.println(this.lexemeTable.size());
-        for (LexemeTable lt : this.lexemeTable) {
-            if (lt != null) {
+        /*for (LexemeTable lt : this.lexemeTable) {
+            /*if (lt != null) {
                 if (lt.getToken() != null)
                     GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
-            }
+            
         }
         for (LexicalErrors le : this.errors) {
             GUI.printErrorMessage(le.getType().toString(),
                 "(" + le.getLine() + "," + le.getColumn() 
                 + ") " + le.getDescription());
-        }
+        } */
     }
 
     /**
