@@ -33,6 +33,8 @@ $ ./init.sh <input_file_name>
 University of Lavras (UFLA)
 * **Igor Nunes** - *Computer Science student of Federal University of 
 Lavras (UFLA)
+* **Igor Carvalho** - *Computer Science student of Federal University of 
+Lavras (UFLA)
 
 ## License
 This project is licensed under  GNU GENERAL PUBLIC LICENSE.
