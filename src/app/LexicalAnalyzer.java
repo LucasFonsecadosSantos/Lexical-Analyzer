@@ -10,9 +10,10 @@
  * by document attached to this software documentation.
  * 
  * by:
- * Lucas Fonseca dos Santos    [201712078]
- * Igor Augusto da Costa Nunes [201420447]
- * Alan Luz Silveira           [201420...]
+ * Lucas Fonseca dos Santos      [201712078]
+ * Igor Augusto da Costa Nunes   [201420447]
+ * Alan Luz Silveira             [201421560]
+ * Igor Emanuel Carvalho da Cruz [201621230]
  * 
  * GITHUB: https://github.com/LucasFonsecadosSantos
  *         https://github.com/Inuness
@@ -28,7 +29,6 @@ import utils.Automaton;
 import view.GUI;
 import model.ErrorType;
 import java.util.Map;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -40,6 +40,7 @@ import java.util.ArrayList;
  * @author Lucas Fonseca Dos Santos
  * @author Igor Augusto da Costa Nunes
  * @author Alan Luz Silveira
+ * @author Igor Emanuel Carvalho da Cruz
  * @version 1.0
  * @since 1.0
  */
@@ -114,12 +115,11 @@ public class LexicalAnalyzer {
             LexicalResults result = this.automaton.makeTokens(line, lineIndex);
             if (result != null) {
                 this.results.add(result);
-                System.out.println(this.results);
             }
         }
         populateTables();
         for (LexemeTable lt : this.lexemeTable) {
-            GUI.printInformationMessage(lt.getLexegitme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
+            GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
         
         }
         for (LexicalErrors le : this.errors) {
@@ -137,7 +137,6 @@ public class LexicalAnalyzer {
      * errors array.
      */
     private void populateTables() {
-        System.out.println(this.results.size());
         for (LexicalResults results : this.results) {
             this.lexemeTable = results.getLexemeTable();
             this.symbolTable = results.getSymbolTable();

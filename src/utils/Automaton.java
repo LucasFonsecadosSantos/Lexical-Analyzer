@@ -10,10 +10,10 @@
  * by document attached to this software documentation.
  * 
  * by:
- * Lucas Fonseca dos Santos    [201712078]
- * Igor Augusto da Costa Nunes [201420447]
- * Alan Luz Silveira           [201420...]
- * Igor Emanuel
+ * Lucas Fonseca dos Santos      [201712078]
+ * Igor Augusto da Costa Nunes   [201420447]
+ * Alan Luz Silveira             [201421560]
+ * Igor Emanuel Carvalho da Cruz [201621230]
  * 
  * GITHUB: https://github.com/LucasFonsecadosSantos
  *         https://github.com/Inuness
@@ -204,9 +204,6 @@ public class Automaton {
                     
                     
                 } else {
-                    /*for (String s : splitedLexeme) {
-                        System.out.println(s);
-                    }*/
                     for (String lexemeSplited : splitedLexeme) {
                         tmpLexeme = "";
                         if(lexemeSplited.equals("")) continue;
