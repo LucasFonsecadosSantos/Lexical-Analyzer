@@ -118,10 +118,11 @@ public class LexicalAnalyzer {
             }
         }
         populateTables();
+        /*
         for (LexemeTable lt : this.lexemeTable) {
             GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
         
-        }
+        }*/
         for (LexicalErrors le : this.errors) {
             GUI.printErrorMessage(le.getType().toString(),
                 "(" + le.getLine() + "," + le.getColumn() 

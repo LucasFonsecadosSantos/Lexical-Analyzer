@@ -1,6 +1,5 @@
-
 package app;
-
+//comentario01
 import model.ErrorType;
 import model.LexemeType;
 import utils.LexicalErrors;
@@ -9,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class LexicalResults {
-    
+    // comentario 03
     private List<LexemeTable> lexemeTable;
     private List<SymbolTable> symbolTable;
-    private List<LexicalErrors> errors;
+    private List<LexicalErrors> errors; // comentariooo as 02
 
     public LexicalResults() {
         this.lexemeTable = new ArrayList<LexemeTable>();

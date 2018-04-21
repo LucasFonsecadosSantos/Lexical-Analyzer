@@ -1,0 +1,1155 @@
+[H[2J[0;97m[..] Compiling the ../test.java code..
+adding: package(1)
+adding: app(2)
+adding: ;(3)
+adding: import(4)
+adding: model(5)
+adding: .(6)
+adding: ErrorType(7)
+adding: ;(8)
+adding: import(9)
+adding: model(10)
+adding: .(11)
+adding: LexemeType(12)
+adding: ;(13)
+adding: import(14)
+adding: utils(15)
+adding: .(16)
+adding: LexicalErrors(17)
+adding: ;(18)
+adding: import(19)
+adding: java(20)
+adding: .(21)
+adding: util(22)
+adding: .(23)
+adding: List(24)
+adding: ;(25)
+adding: import(26)
+adding: java(27)
+adding: .(28)
+adding: util(29)
+adding: .(30)
+adding: ArrayList(31)
+adding: ;(32)
+adding: import(33)
+adding: java(34)
+adding: .(35)
+adding: util(36)
+adding: .(37)
+adding: Map(38)
+adding: ;(39)
+adding: public(40)
+adding: class(41)
+adding: LexicalResults(42)
+adding: {(43)
+adding: private(44)
+adding: lexemeTable(45)
+adding: ;(46)
+adding: private(47)
+adding: symbolTable(48)
+adding: ;(49)
+adding: private(50)
+adding: errors(51)
+adding: ;(52)
+adding: public(53)
+adding: LexicalResults(54)
+adding: ((55)
+adding: )(56)
+adding: {(57)
+adding: .(59)
+adding: lexemeTable(60)
+adding: =(61)
+adding: new(62)
+adding: .(64)
+adding: symbolTable(65)
+adding: =(66)
+adding: new(67)
+adding: .(69)
+adding: errors(70)
+adding: =(71)
+adding: new(72)
+adding: }(73)
+adding: public(74)
+adding: void(75)
+adding: addToLexemeTable(76)
+adding: ((77)
+adding: LexemeTable(78)
+adding: lexemeTable(79)
+adding: ,(80)
+adding: SymbolTable(81)
+adding: symbolTable(82)
+adding: )(83)
+adding: {(84)
+adding: addLexemeTable(85)
+adding: ((86)
+adding: lexemeTable(87)
+adding: )(88)
+adding: ;(89)
+adding: addSymbolTable(90)
+adding: ((91)
+adding: symbolTable(92)
+adding: )(93)
+adding: ;(94)
+adding: }(95)
+adding: public(96)
+adding: void(97)
+adding: addToLexemeTable(98)
+adding: ((99)
+adding: LexemeTable(100)
+adding: lexemeTable(101)
+adding: )(102)
+adding: {(103)
+adding: addLexemeTable(104)
+adding: ((105)
+adding: lexemeTable(106)
+adding: )(107)
+adding: ;(108)
+adding: addSymbolTable(109)
+adding: ((110)
+adding: )(112)
+adding: ;(113)
+adding: }(114)
+adding: public(115)
+adding: void(116)
+adding: addLexemeTable(117)
+adding: ((118)
+adding: String(119)
+adding: lexeme(120)
+adding: ,(121)
+adding: LexemeType(122)
+adding: lexemeClass(123)
+adding: ,(124)
+adding: int(125)
+adding: symbolTableIndex(126)
+adding: )(127)
+adding: {(128)
+adding: if(129)
+adding: ((130)
+adding: lexemeClass(131)
+adding: =(132)
+adding: LexemeType(133)
+adding: .(134)
+adding: OPERATOR(135)
+adding: lexemeClass(136)
+adding: =(137)
+adding: LexemeType(138)
+adding: .(139)
+adding: SEPARATOR(140)
+adding: )(141)
+adding: {(142)
+adding: .(144)
+adding: lexemeTable(145)
+adding: .(146)
+adding: add(147)
+adding: ((148)
+adding: LexemeTable(150)
+adding: ((151)
+adding: lexeme(152)
+adding: ,(153)
+adding: new(154)
+adding: Token(155)
+adding: ((156)
+adding: symbolTableIndex(157)
+adding: )(158)
+adding: )(159)
+adding: )(160)
+adding: ;(161)
+adding: }(162)
+adding: else(163)
+adding: {(164)
+adding: .(166)
+adding: lexemeTable(167)
+adding: .(168)
+adding: add(169)
+adding: ((170)
+adding: LexemeTable(172)
+adding: ((173)
+adding: lexeme(174)
+adding: ,(175)
+adding: new(176)
+adding: Token(177)
+adding: ((178)
+adding: lexemeClass(179)
+adding: ,(180)
+adding: symbolTableIndex(181)
+adding: )(182)
+adding: )(183)
+adding: )(184)
+adding: ;(185)
+adding: }(186)
+adding: }(187)
+adding: public(188)
+adding: void(189)
+adding: addLexemeTable(190)
+adding: ((191)
+adding: LexemeTable(192)
+adding: lexemeTable(193)
+adding: )(194)
+adding: {(195)
+adding: .(197)
+adding: lexemeTable(198)
+adding: .(199)
+adding: add(200)
+adding: ((201)
+adding: lexemeTable(202)
+adding: )(203)
+adding: ;(204)
+adding: }(205)
+adding: public(206)
+adding: void(207)
+adding: addSymbolTable(208)
+adding: ((209)
+adding: SymbolTable(210)
+adding: symbolTable(211)
+adding: )(212)
+adding: {(213)
+adding: .(215)
+adding: symbolTable(216)
+adding: .(217)
+adding: add(218)
+adding: ((219)
+adding: symbolTable(220)
+adding: )(221)
+adding: ;(222)
+adding: }(223)
+adding: public(224)
+adding: void(225)
+adding: addError(226)
+adding: ((227)
+adding: ErrorType(228)
+adding: type(229)
+adding: ,(230)
+adding: int(231)
+adding: lineNumber(232)
+adding: ,(233)
+adding: int(234)
+adding: columnNumber(235)
+adding: )(236)
+adding: {(237)
+adding: .(239)
+adding: errors(240)
+adding: .(241)
+adding: add(242)
+adding: ((243)
+adding: LexicalErrors(245)
+adding: ((246)
+adding: type(247)
+adding: ,(248)
+adding: lineNumber(249)
+adding: ,(250)
+adding: columnNumber(251)
+adding: )(252)
+adding: )(253)
+adding: ;(254)
+adding: }(255)
+adding: public(256)
+adding: getLexemeTable(257)
+adding: ((258)
+adding: )(259)
+adding: {(260)
+adding: return(261)
+adding: .(263)
+adding: lexemeTable(264)
+adding: ;(265)
+adding: }(266)
+adding: public(267)
+adding: getSymbolTable(268)
+adding: ((269)
+adding: )(270)
+adding: {(271)
+adding: return(272)
+adding: .(274)
+adding: symbolTable(275)
+adding: ;(276)
+adding: }(277)
+adding: public(278)
+adding: getErrors(279)
+adding: ((280)
+adding: )(281)
+adding: {(282)
+adding: return(283)
+adding: .(285)
+adding: errors(286)
+adding: ;(287)
+adding: }(288)
+adding: }(289)
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpackage [1].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mapp [2].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [3].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [4].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mmodel [5].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [6].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mErrorType [7].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [8].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [9].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mmodel [10].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [11].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeType [12].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [13].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [14].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mutils [15].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [16].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexicalErrors [17].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [18].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [19].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mjava [20].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [21].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mutil [22].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [23].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mList [24].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [25].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [26].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mjava [27].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [28].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mutil [29].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [30].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mArrayList [31].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [32].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [33].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mjava [34].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [35].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mutil [36].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [37].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mMap [38].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [39].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [40].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mclass [41].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexicalResults [42].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [43].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mprivate [44].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [45].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [46].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mprivate [47].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [48].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [49].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mprivate [50].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96merrors [51].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [52].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [53].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexicalResults [54].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [55].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [56].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [57].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [58].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [59].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [60].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [61].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [62].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [63].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [64].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [65].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [66].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [67].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [68].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [69].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96merrors [70].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [71].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [72].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [73].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [74].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [75].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddToLexemeTable [76].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [77].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [78].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [79].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [80].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mSymbolTable [81].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [82].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [83].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [84].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddLexemeTable [85].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [86].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [87].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [88].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [89].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddSymbolTable [90].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [91].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [92].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [93].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [94].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [95].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [96].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [97].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddToLexemeTable [98].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [99].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [100].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [101].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [102].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [103].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddLexemeTable [104].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [105].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [106].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [107].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [108].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddSymbolTable [109].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [110].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnull [111].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [112].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [113].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [114].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [115].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [116].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddLexemeTable [117].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [118].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mString [119].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexeme [120].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [121].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeType [122].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeClass [123].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [124].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mint [125].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTableIndex [126].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [127].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [128].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mif [129].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [130].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeClass [131].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [132].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeType [133].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [134].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mOPERATOR [135].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeClass [136].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [137].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeType [138].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [139].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mSEPARATOR [140].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [141].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [142].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [143].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [144].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [145].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [146].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [147].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [148].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [149].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [150].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [151].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexeme [152].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [153].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [154].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mToken [155].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [156].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTableIndex [157].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [158].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [159].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [160].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [161].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [162].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96melse [163].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [164].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [165].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [166].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [167].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [168].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [169].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [170].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [171].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [172].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [173].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexeme [174].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [175].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [176].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mToken [177].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [178].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeClass [179].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [180].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTableIndex [181].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [182].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [183].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [184].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [185].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [186].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [187].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [188].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [189].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddLexemeTable [190].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [191].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [192].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [193].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [194].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [195].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [196].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [197].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [198].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [199].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [200].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [201].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [202].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [203].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [204].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [205].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [206].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [207].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddSymbolTable [208].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [209].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mSymbolTable [210].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [211].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [212].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [213].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [214].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [215].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [216].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [217].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [218].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [219].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [220].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [221].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [222].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [223].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [224].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [225].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddError [226].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [227].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mErrorType [228].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mtype [229].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [230].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mint [231].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlineNumber [232].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [233].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mint [234].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mcolumnNumber [235].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [236].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [237].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [238].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [239].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96merrors [240].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [241].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [242].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [243].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [244].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexicalErrors [245].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [246].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mtype [247].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [248].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlineNumber [249].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [250].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mcolumnNumber [251].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [252].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [253].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [254].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [255].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [256].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mgetLexemeTable [257].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [258].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [259].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [260].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mreturn [261].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [262].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [263].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [264].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [265].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [266].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [267].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mgetSymbolTable [268].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [269].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [270].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [271].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mreturn [272].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [273].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [274].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [275].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [276].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [277].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [278].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mgetErrors [279].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [280].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [281].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [282].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mreturn [283].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [284].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [285].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96merrors [286].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [287].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [288].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [289].
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (13,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (14,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (15,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (18,10) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (19,10) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (20,10) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (53,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (57,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (61,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[H[2J[0;97m[..] Compiling the ../test.java code..
+adding: package(1)
+adding: app(2)
+adding: ;(3)
+adding: import(4)
+adding: model(5)
+adding: .(6)
+adding: ErrorType(7)
+adding: ;(8)
+adding: import(9)
+adding: model(10)
+adding: .(11)
+adding: LexemeType(12)
+adding: ;(13)
+adding: import(14)
+adding: utils(15)
+adding: .(16)
+adding: LexicalErrors(17)
+adding: ;(18)
+adding: import(19)
+adding: java(20)
+adding: .(21)
+adding: util(22)
+adding: .(23)
+adding: List(24)
+adding: ;(25)
+adding: import(26)
+adding: java(27)
+adding: .(28)
+adding: util(29)
+adding: .(30)
+adding: ArrayList(31)
+adding: ;(32)
+adding: import(33)
+adding: java(34)
+adding: .(35)
+adding: util(36)
+adding: .(37)
+adding: Map(38)
+adding: ;(39)
+adding: public(40)
+adding: class(41)
+adding: LexicalResults(42)
+adding: {(43)
+adding: private(44)
+DEU FALSO: List
+adding: lexemeTable(45)
+adding: ;(46)
+adding: private(47)
+DEU FALSO: List
+adding: symbolTable(48)
+adding: ;(49)
+adding: private(50)
+DEU FALSO: List
+adding: errors(51)
+adding: ;(52)
+adding: public(53)
+adding: LexicalResults(54)
+adding: ((55)
+adding: )(56)
+adding: {(57)
+adding: .(59)
+adding: lexemeTable(60)
+adding: =(61)
+adding: new(62)
+DEU FALSO: ArrayList
+adding: .(64)
+adding: symbolTable(65)
+adding: =(66)
+adding: new(67)
+DEU FALSO: ArrayList
+adding: .(69)
+adding: errors(70)
+adding: =(71)
+adding: new(72)
+DEU FALSO: ArrayList
+adding: }(73)
+adding: public(74)
+adding: void(75)
+adding: addToLexemeTable(76)
+adding: ((77)
+adding: LexemeTable(78)
+adding: lexemeTable(79)
+adding: ,(80)
+adding: SymbolTable(81)
+adding: symbolTable(82)
+adding: )(83)
+adding: {(84)
+adding: addLexemeTable(85)
+adding: ((86)
+adding: lexemeTable(87)
+adding: )(88)
+adding: ;(89)
+adding: addSymbolTable(90)
+adding: ((91)
+adding: symbolTable(92)
+adding: )(93)
+adding: ;(94)
+adding: }(95)
+adding: public(96)
+adding: void(97)
+adding: addToLexemeTable(98)
+adding: ((99)
+adding: LexemeTable(100)
+adding: lexemeTable(101)
+adding: )(102)
+adding: {(103)
+adding: addLexemeTable(104)
+adding: ((105)
+adding: lexemeTable(106)
+adding: )(107)
+adding: ;(108)
+adding: addSymbolTable(109)
+adding: ((110)
+adding: )(112)
+adding: ;(113)
+adding: }(114)
+adding: public(115)
+adding: void(116)
+adding: addLexemeTable(117)
+adding: ((118)
+adding: String(119)
+adding: lexeme(120)
+adding: ,(121)
+adding: LexemeType(122)
+adding: lexemeClass(123)
+adding: ,(124)
+adding: int(125)
+adding: symbolTableIndex(126)
+adding: )(127)
+adding: {(128)
+adding: if(129)
+adding: ((130)
+adding: lexemeClass(131)
+adding: =(132)
+adding: LexemeType(133)
+adding: .(134)
+adding: OPERATOR(135)
+adding: lexemeClass(136)
+adding: =(137)
+adding: LexemeType(138)
+adding: .(139)
+adding: SEPARATOR(140)
+adding: )(141)
+adding: {(142)
+adding: .(144)
+adding: lexemeTable(145)
+adding: .(146)
+adding: add(147)
+adding: ((148)
+adding: LexemeTable(150)
+adding: ((151)
+adding: lexeme(152)
+adding: ,(153)
+adding: new(154)
+adding: Token(155)
+adding: ((156)
+adding: symbolTableIndex(157)
+adding: )(158)
+adding: )(159)
+adding: )(160)
+adding: ;(161)
+adding: }(162)
+adding: else(163)
+adding: {(164)
+adding: .(166)
+adding: lexemeTable(167)
+adding: .(168)
+adding: add(169)
+adding: ((170)
+adding: LexemeTable(172)
+adding: ((173)
+adding: lexeme(174)
+adding: ,(175)
+adding: new(176)
+adding: Token(177)
+adding: ((178)
+adding: lexemeClass(179)
+adding: ,(180)
+adding: symbolTableIndex(181)
+adding: )(182)
+adding: )(183)
+adding: )(184)
+adding: ;(185)
+adding: }(186)
+adding: }(187)
+adding: public(188)
+adding: void(189)
+adding: addLexemeTable(190)
+adding: ((191)
+adding: LexemeTable(192)
+adding: lexemeTable(193)
+adding: )(194)
+adding: {(195)
+adding: .(197)
+adding: lexemeTable(198)
+adding: .(199)
+adding: add(200)
+adding: ((201)
+adding: lexemeTable(202)
+adding: )(203)
+adding: ;(204)
+adding: }(205)
+adding: public(206)
+adding: void(207)
+adding: addSymbolTable(208)
+adding: ((209)
+adding: SymbolTable(210)
+adding: symbolTable(211)
+adding: )(212)
+adding: {(213)
+adding: .(215)
+adding: symbolTable(216)
+adding: .(217)
+adding: add(218)
+adding: ((219)
+adding: symbolTable(220)
+adding: )(221)
+adding: ;(222)
+adding: }(223)
+adding: public(224)
+adding: void(225)
+adding: addError(226)
+adding: ((227)
+adding: ErrorType(228)
+adding: type(229)
+adding: ,(230)
+adding: int(231)
+adding: lineNumber(232)
+adding: ,(233)
+adding: int(234)
+adding: columnNumber(235)
+adding: )(236)
+adding: {(237)
+adding: .(239)
+adding: errors(240)
+adding: .(241)
+adding: add(242)
+adding: ((243)
+adding: LexicalErrors(245)
+adding: ((246)
+adding: type(247)
+adding: ,(248)
+adding: lineNumber(249)
+adding: ,(250)
+adding: columnNumber(251)
+adding: )(252)
+adding: )(253)
+adding: ;(254)
+adding: }(255)
+adding: public(256)
+DEU FALSO: List
+adding: getLexemeTable(257)
+adding: ((258)
+adding: )(259)
+adding: {(260)
+adding: return(261)
+adding: .(263)
+adding: lexemeTable(264)
+adding: ;(265)
+adding: }(266)
+adding: public(267)
+DEU FALSO: List
+adding: getSymbolTable(268)
+adding: ((269)
+adding: )(270)
+adding: {(271)
+adding: return(272)
+adding: .(274)
+adding: symbolTable(275)
+adding: ;(276)
+adding: }(277)
+adding: public(278)
+DEU FALSO: List
+adding: getErrors(279)
+adding: ((280)
+adding: )(281)
+adding: {(282)
+adding: return(283)
+adding: .(285)
+adding: errors(286)
+adding: ;(287)
+adding: }(288)
+adding: }(289)
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpackage [1].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mapp [2].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [3].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [4].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mmodel [5].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [6].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mErrorType [7].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [8].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [9].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mmodel [10].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [11].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeType [12].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [13].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [14].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mutils [15].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [16].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexicalErrors [17].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [18].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [19].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mjava [20].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [21].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mutil [22].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [23].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mList [24].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [25].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [26].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mjava [27].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [28].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mutil [29].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [30].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mArrayList [31].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [32].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mimport [33].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mjava [34].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [35].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mutil [36].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [37].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mMap [38].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [39].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [40].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mclass [41].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexicalResults [42].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [43].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mprivate [44].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [45].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [46].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mprivate [47].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [48].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [49].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mprivate [50].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96merrors [51].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [52].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [53].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexicalResults [54].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [55].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [56].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [57].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [58].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [59].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [60].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [61].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [62].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [63].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [64].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [65].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [66].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [67].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [68].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [69].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96merrors [70].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [71].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [72].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [73].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [74].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [75].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddToLexemeTable [76].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [77].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [78].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [79].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [80].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mSymbolTable [81].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [82].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [83].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [84].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddLexemeTable [85].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [86].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [87].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [88].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [89].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddSymbolTable [90].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [91].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [92].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [93].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [94].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [95].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [96].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [97].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddToLexemeTable [98].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [99].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [100].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [101].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [102].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [103].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddLexemeTable [104].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [105].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [106].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [107].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [108].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddSymbolTable [109].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [110].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnull [111].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [112].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [113].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [114].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [115].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [116].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddLexemeTable [117].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [118].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mString [119].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexeme [120].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [121].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeType [122].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeClass [123].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [124].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mint [125].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTableIndex [126].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [127].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [128].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mif [129].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [130].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeClass [131].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [132].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeType [133].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [134].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mOPERATOR [135].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeClass [136].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m= [137].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeType [138].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [139].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mSEPARATOR [140].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [141].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [142].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [143].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [144].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [145].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [146].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [147].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [148].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [149].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [150].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [151].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexeme [152].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [153].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [154].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mToken [155].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [156].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTableIndex [157].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [158].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [159].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [160].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [161].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [162].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96melse [163].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [164].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [165].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [166].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [167].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [168].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [169].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [170].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [171].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [172].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [173].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexeme [174].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [175].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [176].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mToken [177].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [178].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeClass [179].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [180].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTableIndex [181].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [182].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [183].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [184].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [185].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [186].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [187].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [188].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [189].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddLexemeTable [190].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [191].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexemeTable [192].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [193].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [194].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [195].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [196].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [197].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [198].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [199].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [200].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [201].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [202].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [203].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [204].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [205].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [206].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [207].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddSymbolTable [208].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [209].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mSymbolTable [210].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [211].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [212].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [213].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [214].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [215].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [216].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [217].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [218].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [219].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [220].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [221].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [222].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [223].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [224].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mvoid [225].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96maddError [226].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [227].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mErrorType [228].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mtype [229].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [230].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mint [231].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlineNumber [232].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [233].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mint [234].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mcolumnNumber [235].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [236].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [237].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [238].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [239].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96merrors [240].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [241].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96madd [242].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [243].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mnew [244].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mLexicalErrors [245].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [246].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mtype [247].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [248].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlineNumber [249].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m, [250].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mcolumnNumber [251].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [252].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [253].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [254].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [255].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [256].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mgetLexemeTable [257].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [258].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [259].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [260].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mreturn [261].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [262].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [263].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mlexemeTable [264].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [265].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [266].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [267].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mgetSymbolTable [268].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [269].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [270].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [271].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mreturn [272].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [273].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [274].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96msymbolTable [275].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [276].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [277].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mpublic [278].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mgetErrors [279].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m( [280].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m) [281].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m{ [282].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mreturn [283].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96mthis [284].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m. [285].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96merrors [286].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m; [287].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [288].
+[0;97m[[0;96mINFORMATION[0;97m] [0;96m} [289].
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (13,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (14,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (15,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (18,10) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (19,10) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (20,10) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (53,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (57,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
+[0;97m[[0;91mERROR[0;97m] [1;101m INVALID_LEXEME_ERR [0;91m: (61,5) You have a invalid identifier or reservatedword. Please, you must fix this tocontninue.
