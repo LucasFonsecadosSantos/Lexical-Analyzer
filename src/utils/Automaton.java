@@ -201,7 +201,6 @@ public class Automaton {
                                 break;
                             }
                         }
-
                         if (!error) {
                             //FOUND A NUMBER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
                             ++currentLexeme;
@@ -214,6 +213,7 @@ public class Automaton {
                         }
                     } else if (isCharacter(currentSymbol)) {
                         tmpLexeme += currentSymbol;
+                        
                         for (int i=1 ; i<lexeme.length() ; i++) {
                             ++currentSymbolAmount;
                             currentSymbol = lexeme.charAt(i);
@@ -401,14 +401,7 @@ public class Automaton {
      * @param character A symbol will be verificate if the symbol is or isn't a character.
      */
     private Boolean isCharacter(char character) {
-        for (char symbol : this.identifierSymbols) {
-            if (character == symbol) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
+        return ((Character.isLetter(character) || character == '$' | character == '_'));
     } 
 
     /**

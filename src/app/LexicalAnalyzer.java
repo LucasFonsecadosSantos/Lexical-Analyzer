@@ -108,7 +108,7 @@ public class LexicalAnalyzer {
      * from source code to automaton.
      * 
      */
-    public void start() {
+    public Object[] start() {
         int lineIndex = 0;
         for (String line : this.sourceCode) {
             ++lineIndex;
@@ -118,16 +118,9 @@ public class LexicalAnalyzer {
             }
         }
         populateTables();
-        /*
-        for (LexemeTable lt : this.lexemeTable) {
-            GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
-        
-        }*/
-        for (LexicalErrors le : this.errors) {
-            GUI.printErrorMessage(le.getType().toString(),
-                "(" + le.getLine() + "," + le.getColumn() 
-                + ") " + le.getDescription());
-        } 
+        return new Object[] {
+            this.lexemeTable, this.symbolTable, this.errors
+        };
     }
 
     /**
