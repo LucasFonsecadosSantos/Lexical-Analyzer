@@ -10,9 +10,10 @@
  * by document attached to this software documentation.
  * 
  * by:
- * Lucas Fonseca dos Santos    [201712078]
- * Igor Augusto da Costa Nunes [201420447]
- * Alan Luz Silveira           [201420...]
+ * Lucas Fonseca dos Santos      [201712078]
+ * Igor Augusto da Costa Nunes   [201420447]
+ * Alan Luz Silveira             [201421560]
+ * Igor Emanuel Carvalho da Cruz [201621230]
  * 
  * GITHUB: https://github.com/LucasFonsecadosSantos
  *         https://github.com/Inuness
@@ -35,6 +36,7 @@ import model.ErrorType;
  * @author Lucas Fonseca Dos Santos
  * @author Igor Augusto da Costa Nunes
  * @author Alan Luz Silveira
+ * @author Igor Emanuel Carvalho da CruzO
  * @version 1.0
  * @since 1.0
  */
@@ -156,24 +158,20 @@ public class LexicalErrors {
         switch(type) {
             case INVALID_LEXEME_ERR:
                 this.description = "You have a " 
-                + "invalid identifier or reservated"
-                + "word. Please, you must fix this to"
-                + "contninue";
+                + "invalid identifier or reservated "
+                + "word";
                 break;
             case INVALID_OPERAND_ERR:
                 this.description = "You have a " 
-                + "invalid operator Please, you"
-                + "must fix this to contninue";
+                + "invalid operator";
                 break;
             case INVALID_CHARACTER_ERR:
                 this.description = "You have a " 
-                + "invalid character. Please, "
-                + "you must fix this to contninue";
+                + "invalid character";
                 break;
             case INVALID_NUMBER_ERR:
                 this.description = "You have a " 
-                + "invalid number. Please, you"
-                + "must fix this to contninue";
+                + "invalid number";
                 break;
         }
     }

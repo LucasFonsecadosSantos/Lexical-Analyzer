@@ -10,9 +10,10 @@
  * by document attached to this software documentation.
  * 
  * by:
- * Lucas Fonseca dos Santos    [201712078]
- * Igor Augusto da Costa Nunes [201420447]
- * Alan Luz Silveira           [201420...]
+ * Lucas Fonseca dos Santos      [201712078]
+ * Igor Augusto da Costa Nunes   [201420447]
+ * Alan Luz Silveira             [201421560]
+ * Igor Emanuel Carvalho da Cruz [201621230]
  * 
  * GITHUB: https://github.com/LucasFonsecadosSantos
  *         https://github.com/Inuness
@@ -29,6 +30,7 @@ package view;
  * @author Lucas Fonseca Dos Santos
  * @author Igor Augusto da Costa Nunes
  * @author Alan Luz Silveira
+ * @author Igor Emanuel Carvalho da Cruz
  * @version 1.0
  * @since 1.0
  */
@@ -377,6 +379,7 @@ public class GUI {
      * process to user by console.
      * 
      * @param message A error message from compiler process.
+     * @param title A title of error log.
      */
     public static void printErrorMessage(String title, String message) {
         System.out.println(WHITE_BRIGHT + "[" + RED_BRIGHT + "ERROR" + WHITE_BRIGHT + "] "
@@ -388,6 +391,7 @@ public class GUI {
      * process to user by console.
      * 
      * @param message A warning message from compiler process.
+     * @param title A title of warning log.
      */
     public static void printWarningMessage(String title, String message) {
         System.out.println(WHITE_BRIGHT + "[" + YELLOW_BRIGHT + "WARNING" + WHITE_BRIGHT + "] " + 

@@ -56,7 +56,7 @@ public class LexemeTable {
      * lexeme attribute state and token attribute states
      * with params received from the caller method.
      * 
-     * @param lexem A string lexeme.
+     * @param lexeme A string lexeme.
      * @param token A token object.
      */
     public LexemeTable(String lexeme ,Token token) {

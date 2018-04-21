@@ -49,10 +49,7 @@ public class FileHandler {
      * content and return this by List.
      * 
      * @param fileName The file path name for read operation.
-     * @throws FileNotFoundException If the file not found.
-     * @throws IOException If IO error occurency.
-     * @throws Exception If any exception.
-     * @return List
+     * @return List A source code data.
      */
     public static List<String> getSourceCode(String fileName) {
 

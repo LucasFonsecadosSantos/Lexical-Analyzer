@@ -44,7 +44,6 @@ import java.util.ArrayList;
  * @since 1.0
  *
  *
- * = == > ++ && <= ! - -- + += *
  * 
  * ,.[{()}];
  * 
@@ -54,7 +53,7 @@ import java.util.ArrayList;
  * class if package static while
  * else instanceof private super
  * 
- * <identifier > = (a-z|A-Z|_|$){a-z|A-Z|_|0-9|$}
+ * identifier = (a-z|A-Z|_|$){a-z|A-Z|_|0-9|$}
  */
 public class Automaton {
 
@@ -100,11 +99,13 @@ public class Automaton {
      * comments expressions.
      */
     private String[] commentDelimiter;
+
+    private char[] identifierSymbols;
+
     /**
      * Current lexeme attribute.
      */
     private int currentLexeme;
-
     private Boolean errorState;
 
     /**
@@ -139,6 +140,14 @@ public class Automaton {
         };
         this.commentDelimiter = new String[] {
             "//"
+        };
+        this.identifierSymbols = new char[] {
+            'a','b','c','d','e','f','g','h','i',
+            'j','k','l','m','n','o','p','q','r','s',
+            't','u','v','w','x','y','z','_','$',
+            'A','B','C','D','E','F','G','H','I','J','K',
+            'L','M','N','O','P','Q','R','S','T','U','V',
+            'W','X','Y','Z'
         };
         this.lexicalResults = new LexicalResults();
         currentLexeme =0;
@@ -392,7 +401,14 @@ public class Automaton {
      * @param character A symbol will be verificate if the symbol is or isn't a character.
      */
     private Boolean isCharacter(char character) {
-        return (Character.isLetter(character));
+        for (char symbol : this.identifierSymbols) {
+            if (character == symbol) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     } 
 
     /**

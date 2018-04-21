@@ -108,7 +108,7 @@ public class SymbolTable {
      * The index attribute modifier method.
      * It changes the index attribute state.
      * 
-     * @param type New index attribute state.
+     * @param index New index attribute state.
      */
     public void setIndex(int index) {
         this.index = index;
