@@ -107,6 +107,7 @@ public class Automaton {
      */
     private int currentLexeme;
     private Boolean errorState;
+    private Boolean commentState;
 
     /**
      * The automaton object constructor.
@@ -158,171 +159,73 @@ public class Automaton {
             String[] lexemes = sourceLine.split(" ");
             String[] splitedLexeme;
             String tmpLexeme;
-            Boolean error;
             char currentSymbol;
-            int currentSymbolAmount = 0;
+            int columnNumber = 0;
             Boolean comment = false;
+            this.errorState = false;
+            this.commentState = false;
             
             for (String lexeme : lexemes) {
                 tmpLexeme = "";
-                error = false;
-                
+                this.errorState = false;
                 if(lexeme.equals("")) continue;
-                currentSymbolAmount++;
+                columnNumber++;
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
                     if (lexeme.equals("")) continue;
                     currentSymbol = lexeme.charAt(0);
                     if (isComment(lexeme)) {
-                        comment = true;
-                        String commentLexeme = "";
-                        Boolean control = false;
-                        for (String commentString : lexemes) {
-                            if (control) {
-                                commentLexeme += commentString;
-                            } else {
-                                control = isComment(commentString);
-                            }
-                        }
                         ++currentLexeme;
-                        System.out.println("e COMENTARIO: " + commentLexeme);
-                        this.lexicalResults.addLexemeTable(commentLexeme, LexemeType.COMMENT, currentLexeme);
+                        handlingComment(commentHandler(lexeme, lexemes, index, columnNumber), currentLexeme);
                         break;
                     } else if (isNumber(currentSymbol)) {
-                        tmpLexeme += currentSymbol;
-
-                        for (int i=1 ; i < lexeme.length() ; i++) {
-                            ++currentSymbolAmount;
-                            currentSymbol = lexeme.charAt(i);
-                            if (isNumber(currentSymbol)) {
-                                tmpLexeme += currentSymbol;
-                            } else {
-                                this.lexicalResults.addError(ErrorType.INVALID_NUMBER_ERR ,index, currentSymbolAmount);
-                                error = true;
-                                break;
-                            }
-                        }
-                        if (!error) {
-                            //FOUND A NUMBER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
+                        columnNumber = numberHandler(lexeme, index, columnNumber);
+                        if (!this.errorState) {
                             ++currentLexeme;
-                            SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme, currentLexeme);
-                            //System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
-                            this.lexicalResults.addSymbolTable(symbol); 
-                            this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.INT_LITERAL, currentLexeme);
+                            handlingNumbers(lexeme, currentLexeme);
                         } else {
                             break;
                         }
                     } else if (isCharacter(currentSymbol)) {
-                        tmpLexeme += currentSymbol;
-                        
-                        for (int i=1 ; i<lexeme.length() ; i++) {
-                            ++currentSymbolAmount;
-                            currentSymbol = lexeme.charAt(i);
-                            if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
-                                tmpLexeme += currentSymbol;
-                            } else {
-                                
-                                this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, currentSymbolAmount);
-                                error = true;
-                                break;
-                            }
-                        }
-                        if (!error) {
+                        columnNumber = identifierHandler(lexeme, index, columnNumber);
+                        if (!this.errorState) {
                             ++currentLexeme;
-                            if (isReservedWord(tmpLexeme)) {
-                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.RESERVED_SYMBOL, currentLexeme);
-                            } else {
-                                SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme, currentLexeme);
-                                this.lexicalResults.addSymbolTable(symbol); 
-                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, currentLexeme);
-                            }
-                            //System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
+                            handlingIdentifiers(lexeme, currentLexeme);
                         } else {
                             break;
-                        } 
+                        }
                     }
-                    
-                    
                 } else {
                     for (String lexemeSplited : splitedLexeme) {
                         tmpLexeme = "";
                         if(lexemeSplited.equals("")) continue;
-                        ++currentSymbolAmount;
+                        ++columnNumber;
                         currentSymbol = lexemeSplited.charAt(0);
                         if (isComment(lexeme)) {
-                            comment = true;
-                            String commentLexeme = "";
-                            Boolean control = false;
-                            for (String commentString : lexemes) {
-                                if (control) {
-                                    commentLexeme += commentString;
-                                } else {
-                                    control = isComment(commentString);
-                                }
-                            }
                             ++currentLexeme;
-                            this.lexicalResults.addLexemeTable(commentLexeme, LexemeType.COMMENT, currentLexeme);
-                            System.out.println("e COMENTARIO: " + commentLexeme);
+                            handlingComment(commentHandler(lexemeSplited, splitedLexeme, index, columnNumber), currentLexeme);
                             break;
                         } else  if (isNumber(currentSymbol)) {
-                            tmpLexeme += currentSymbol;
-                            for (int i = 1 ; i < lexemeSplited.length() ; i++) {
-                                ++currentSymbolAmount;
-                                currentSymbol = lexemeSplited.charAt(i);
-                                if (isNumber(currentSymbol)) {
-                                    tmpLexeme += currentSymbol;
-                                } else {
-                                    this.lexicalResults.addError(ErrorType.INVALID_NUMBER_ERR ,index, currentSymbolAmount);
-                                    error = true;
-                                    break;
-                                }
-                            }
-                            if (!error) {
-                                //FOUND A NUMBER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
+                            columnNumber = numberHandler(lexemeSplited, index, columnNumber);
+                            if (!this.errorState) {
                                 ++currentLexeme;
-                                SymbolTable symbol = new SymbolTable(LexemeType.INT_LITERAL, tmpLexeme, currentLexeme);
-                                //System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
-                                this.lexicalResults.addSymbolTable(symbol); 
-                                this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.INT_LITERAL, currentLexeme);
+                                handlingNumbers(lexemeSplited, currentLexeme);
                             } else {
                                 break;
                             }
                         } else if (isCharacter(currentSymbol)) {
-                            tmpLexeme += currentSymbol;
-                            for (int i = 1 ; i < lexemeSplited.length() ; i++) {
-                                ++currentSymbolAmount;
-                                currentSymbol = lexemeSplited.charAt(i);
-                                if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
-                                    tmpLexeme += currentSymbol;
-                                } else {
-                                    this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, currentSymbolAmount);
-                                    error = true;
-                                    break;
-                                }
-                            }
-                            if (!error) {
-                                //FOUND A IDENTIFIER, THEN, SAVES AT SYMBOL TABLE AND LEXEME TABLE.
+                            columnNumber = identifierHandler(lexemeSplited, index, columnNumber);
+                            if (!this.errorState) {
                                 ++currentLexeme;
-                                if (isReservedWord(tmpLexeme)) {
-                                    this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.RESERVED_SYMBOL, currentLexeme);
-                                } else {
-                                    SymbolTable symbol = new SymbolTable(LexemeType.IDENTIFIER, tmpLexeme, currentLexeme);
-                                    this.lexicalResults.addSymbolTable(symbol); 
-                                    this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.IDENTIFIER, currentLexeme);
-                                    //System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
-                                }
+                                handlingIdentifiers(lexemeSplited, currentLexeme);
                             } else {
                                 break;
                             }
-                        } else if (isOperand(currentSymbol)) {
+                        } else if (isOperand(lexemeSplited)) {
                             ++currentLexeme;
-                            tmpLexeme += currentSymbol;
-                            this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.OPERATOR, currentLexeme);
-                            //System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
+                            handlingOperators(lexemeSplited, currentLexeme);
                         } else if (isSeparator(currentSymbol)) {
                             ++currentLexeme;
-                            tmpLexeme += currentSymbol;
-                            this.lexicalResults.addLexemeTable(tmpLexeme, LexemeType.SEPARATOR, currentLexeme);
-                            //System.out.println("adding: " + tmpLexeme + "("+currentLexeme+")");
+                            handlingSeparator(currentSymbol, currentLexeme);
                         }
                         if (comment) {
                             break;
@@ -337,6 +240,83 @@ public class Automaton {
                 
     }
 
+    private String commentHandler(String lexeme, String[] lexemeArray, int index, int columnNumber) {
+        this.commentState = true;
+        String commentLexeme = "";
+        Boolean control = false;
+        for (String commentString : lexemeArray) {
+            if (control) {
+                commentLexeme += commentString;
+            } else {
+                control = isComment(commentString);
+                if (control) commentLexeme += commentString;
+            }
+        }
+        return commentLexeme;
+    }
+
+    private int numberHandler(String lexeme, int index, int columnNumber) {
+        char currentSymbol = lexeme.charAt(0);
+        String tmpLexeme = "";
+        tmpLexeme += currentSymbol;
+        for (int i = 1 ; i < lexeme.length() ; i++) {
+            ++columnNumber;
+            currentSymbol = lexeme.charAt(i);
+            if (isNumber(currentSymbol)) {
+                tmpLexeme += currentSymbol;
+            } else {
+                this.lexicalResults.addError(ErrorType.INVALID_NUMBER_ERR ,index, columnNumber);
+                this.errorState = true;
+                break;
+            }
+        }
+        return columnNumber;
+    }
+    private int identifierHandler(String lexeme, int index, int columnNumber) {
+        char currentSymbol = lexeme.charAt(0);
+        String tmpLexeme = "";
+        tmpLexeme += currentSymbol;
+        for (int i=1 ; i<lexeme.length() ; i++) {
+            ++columnNumber;
+            currentSymbol = lexeme.charAt(i);
+            if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
+                tmpLexeme += currentSymbol;
+            } else {
+                
+                this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, columnNumber);
+                this.errorState = true;
+                break;
+            }
+        }
+        return columnNumber;
+    }
+    
+    private void handlingComment(String lexeme, int lexemeIndex) {
+        this.lexicalResults.addLexemeTable(" " + lexeme, LexemeType.COMMENT, currentLexeme);
+    }
+
+    private void handlingSeparator(char lexeme, int lexemeIndex) {
+        this.lexicalResults.addLexemeTable(String.valueOf(lexeme), LexemeType.SEPARATOR, lexemeIndex);
+    }
+
+    private void handlingOperators(String lexeme, int lexemeIndex) {
+        this.lexicalResults.addLexemeTable(lexeme, LexemeType.OPERATOR, lexemeIndex);
+    }
+
+    private void handlingNumbers(String lexeme, int lexemeIndex) {
+        this.lexicalResults.addSymbolTable(new SymbolTable(LexemeType.INT_LITERAL, lexeme, lexemeIndex)); 
+        this.lexicalResults.addLexemeTable(lexeme, LexemeType.INT_LITERAL, lexemeIndex);
+    }
+
+    private void handlingIdentifiers(String lexeme, int lexemeIndex) {
+        if (isReservedWord(lexeme)) {
+            this.lexicalResults.addLexemeTable(lexeme, LexemeType.RESERVED_SYMBOL, lexemeIndex);
+        } else {
+            this.lexicalResults.addSymbolTable(new SymbolTable(LexemeType.IDENTIFIER, lexeme, lexemeIndex)); 
+            this.lexicalResults.addLexemeTable(lexeme, LexemeType.IDENTIFIER, lexemeIndex);
+        }
+    }
+
     /**
      * This method verifys if the a lexeme received by
      * param is a comment.
@@ -346,13 +326,11 @@ public class Automaton {
      */
     private Boolean isComment(String lexeme) {
         for (String symbol : this.commentDelimiter) {
-            if (lexeme.equals(symbol)) {
+            if (lexeme.equals(symbol) || lexeme.contains(symbol)) {
                 System.out.println("LEXEMEEE " + lexeme);
                 return true;
             }
         }
-
-        //System.out.println("LEXEMEEE " + lexeme);
         return false;
     }
 
@@ -385,7 +363,7 @@ public class Automaton {
     private String[] sliptBySpecialCharacteres(String lexeme) {
         for (char separator : this.separators) {
             for (String operand : this.operators) {
-                if (lexeme.contains(String.valueOf(separator)) || lexeme.contains(operand)) {
+                if (lexeme.contains(String.valueOf(separator)) || lexeme.contains(operand) || lexeme.contains("//")) {
                     return lexeme.replaceAll("(==?|&&|\\+[+=]?|<=|--?|[>!*,;.\\[{()}\\]])", "#$1#").split("#");
                 }
             }
@@ -411,10 +389,9 @@ public class Automaton {
      * @param operand A character that will be avaliated if it's operator.
      * @return Boolean True if the character is operator by language grammar definitions.
      */
-    private Boolean isOperand(char operand) {
-        String operandStr = String.valueOf(operand);
+    private Boolean isOperand(String lexeme) {
         for (String operator : this.operators) {
-            if (operator.equals(operandStr)) {
+            if (operator.equals(lexeme)) {
                 return true;
             }
         }

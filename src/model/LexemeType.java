@@ -88,6 +88,13 @@ public enum LexemeType {
     OPERATOR,
 
     /**
+     * DELIMITER
+     * used for demiliters specified
+     * by language grammar definitions.
+     */
+    DELIMITER,
+
+    /**
      * SEPARATOR
      * used for separators and delimiters specified
      * by language grammar definitions.

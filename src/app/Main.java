@@ -37,7 +37,7 @@ public class Main {
         if (results[0] instanceof List) {
             List<LexemeTable> lexemeTable = (List<LexemeTable>) results[0];
             for (LexemeTable lt : lexemeTable) {
-                GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"]");
+                GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"] " + "(" + lt.getToken().getLexemeClass() + ")");
             }
         }
         if (results[1] instanceof List) {

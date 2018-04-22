@@ -105,7 +105,7 @@ public class LexicalResults {
      */
     public void addLexemeTable(String lexeme, LexemeType lexemeClass, int symbolTableIndex) {
         if (lexemeClass == LexemeType.OPERATOR || lexemeClass == LexemeType.SEPARATOR) {
-            this.lexemeTable.add(new LexemeTable(lexeme, new Token(symbolTableIndex)));
+            this.lexemeTable.add(new LexemeTable(lexeme, new Token(lexemeClass, symbolTableIndex)));
         } else {
             this.lexemeTable.add(new LexemeTable(lexeme, new Token(lexemeClass, symbolTableIndex)));
         }
