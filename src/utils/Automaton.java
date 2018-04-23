@@ -164,7 +164,7 @@ public class Automaton {
             'W','X','Y','Z'
         };
         this.lexicalResults = new LexicalResults();
-        this.currentLexeme =0;
+        this.currentLexeme = 0;
     }
 
     public LexicalResults makeTokens(String sourceLine, int lineNumber) {
@@ -183,7 +183,6 @@ public class Automaton {
             if ((commentString = getComment(sourceLine)) != null) {
                 tmpComment = true;
             }
-            
             
             for (String lexeme : lexemes) {
                 this.tmpStrLexeme = "";
@@ -238,7 +237,7 @@ public class Automaton {
                         } else if (isOperand(lexemeSplited) && !this.commentState) {
                             ++currentLexeme;
                             storeOperator(lexemeSplited, currentLexeme);
-                        } else if (isSeparator(currentSymbol)) {
+                        } else if (isSeparator(currentSymbol) && !this.commentState) {
                             ++currentLexeme;
                             storeSeparator(currentSymbol, currentLexeme);
                         }
@@ -315,12 +314,14 @@ public class Automaton {
                 return columnNumber;
             }
         }
+        
         for (int i=0 ; i<lexeme.length() ; i++) {
             currentSymbol = lexeme.charAt(i);
             if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                 this.tmpStrLexeme += currentSymbol;
                 ++columnNumber;
             } else if ((i < lexeme.length()-1 ) && (currentSymbol == '/') && (lexeme.charAt(i+1) == '/')) {
+                this.commentState = true;
                 return columnNumber;
             } else {
                 this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, columnNumber);
