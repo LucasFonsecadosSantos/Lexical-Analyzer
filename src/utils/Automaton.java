@@ -100,13 +100,24 @@ public class Automaton {
      */
     private String[] commentDelimiter;
 
+    /**
+     * Valid identifys symbols attribute;
+     */
     private char[] identifierSymbols;
 
     /**
      * Current lexeme attribute.
      */
     private int currentLexeme;
+
+    /**
+     * Error state attribute;
+     */
     private Boolean errorState;
+
+    /**
+     * Comment state attribute;
+     */
     private Boolean commentState;
 
     /**
@@ -175,13 +186,13 @@ public class Automaton {
                     currentSymbol = lexeme.charAt(0);
                     if (isComment(lexeme)) {
                         ++currentLexeme;
-                        handlingComment(commentHandler(lexeme, lexemes, index, columnNumber), currentLexeme);
+                        storeComment(commentHandler(lexeme, lexemes, index, columnNumber), currentLexeme);
                         break;
                     } else if (isNumber(currentSymbol)) {
                         columnNumber = numberHandler(lexeme, index, columnNumber);
                         if (!this.errorState) {
                             ++currentLexeme;
-                            handlingNumbers(lexeme, currentLexeme);
+                            storeNumber(lexeme, currentLexeme);
                         } else {
                             break;
                         }
@@ -189,7 +200,7 @@ public class Automaton {
                         columnNumber = identifierHandler(lexeme, index, columnNumber);
                         if (!this.errorState) {
                             ++currentLexeme;
-                            handlingIdentifiers(lexeme, currentLexeme);
+                            storeIdentifier(lexeme, currentLexeme);
                         } else {
                             break;
                         }
@@ -202,13 +213,13 @@ public class Automaton {
                         currentSymbol = lexemeSplited.charAt(0);
                         if (isComment(lexeme)) {
                             ++currentLexeme;
-                            handlingComment(commentHandler(lexemeSplited, splitedLexeme, index, columnNumber), currentLexeme);
+                            storeComment(commentHandler(lexemeSplited, splitedLexeme, index, columnNumber), currentLexeme);
                             break;
                         } else  if (isNumber(currentSymbol)) {
                             columnNumber = numberHandler(lexemeSplited, index, columnNumber);
                             if (!this.errorState) {
                                 ++currentLexeme;
-                                handlingNumbers(lexemeSplited, currentLexeme);
+                                storeNumber(lexemeSplited, currentLexeme);
                             } else {
                                 break;
                             }
@@ -216,16 +227,16 @@ public class Automaton {
                             columnNumber = identifierHandler(lexemeSplited, index, columnNumber);
                             if (!this.errorState) {
                                 ++currentLexeme;
-                                handlingIdentifiers(lexemeSplited, currentLexeme);
+                                storeIdentifier(lexemeSplited, currentLexeme);
                             } else {
                                 break;
                             }
                         } else if (isOperand(lexemeSplited)) {
                             ++currentLexeme;
-                            handlingOperators(lexemeSplited, currentLexeme);
+                            storeOperator(lexemeSplited, currentLexeme);
                         } else if (isSeparator(currentSymbol)) {
                             ++currentLexeme;
-                            handlingSeparator(currentSymbol, currentLexeme);
+                            storeSeparator(currentSymbol, currentLexeme);
                         }
                         if (comment) {
                             break;
@@ -291,24 +302,24 @@ public class Automaton {
         return columnNumber;
     }
     
-    private void handlingComment(String lexeme, int lexemeIndex) {
+    private void storeComment(String lexeme, int lexemeIndex) {
         this.lexicalResults.addLexemeTable(" " + lexeme, LexemeType.COMMENT, currentLexeme);
     }
 
-    private void handlingSeparator(char lexeme, int lexemeIndex) {
+    private void storeSeparator(char lexeme, int lexemeIndex) {
         this.lexicalResults.addLexemeTable(String.valueOf(lexeme), LexemeType.SEPARATOR, lexemeIndex);
     }
 
-    private void handlingOperators(String lexeme, int lexemeIndex) {
+    private void storeOperator(String lexeme, int lexemeIndex) {
         this.lexicalResults.addLexemeTable(lexeme, LexemeType.OPERATOR, lexemeIndex);
     }
 
-    private void handlingNumbers(String lexeme, int lexemeIndex) {
+    private void storeNumber(String lexeme, int lexemeIndex) {
         this.lexicalResults.addSymbolTable(new SymbolTable(LexemeType.INT_LITERAL, lexeme, lexemeIndex)); 
         this.lexicalResults.addLexemeTable(lexeme, LexemeType.INT_LITERAL, lexemeIndex);
     }
 
-    private void handlingIdentifiers(String lexeme, int lexemeIndex) {
+    private void storeIdentifier(String lexeme, int lexemeIndex) {
         if (isReservedWord(lexeme)) {
             this.lexicalResults.addLexemeTable(lexeme, LexemeType.RESERVED_SYMBOL, lexemeIndex);
         } else {
