@@ -20,7 +20,9 @@
  *         https://github.com/alanluz
  * 
  */
-package app;
+package table;
+
+import app.Token;
 
 /**
  * This class represents the Lexeme table row model.

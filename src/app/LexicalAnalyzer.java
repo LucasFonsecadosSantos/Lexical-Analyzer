@@ -22,9 +22,10 @@
  */
 package app;
 
-import app.LexemeTable;
+import table.LexemeTable;
+import table.SymbolTable;
+import table.ErrorTable;
 import dao.FileHandler;
-import utils.LexicalErrors;
 import utils.Automaton;
 import view.GUI;
 import model.ErrorType;
@@ -72,10 +73,10 @@ public class LexicalAnalyzer {
 
     /**
      * Lexical errors table attributes. This
-     * is a List<LexicalErrors> super class pointer
-     * that contains a lot of lexicalErrors objects.
+     * is a List<ErrorTable> super class pointer
+     * that contains a lot of ErrorTable objects.
      */
-    private List<LexicalErrors> errors;
+    private List<ErrorTable> errors;
 
     /**
      * The lexical results table attribute. It contains
@@ -99,7 +100,7 @@ public class LexicalAnalyzer {
         this.lexemeTable = new ArrayList<LexemeTable>();
         this.symbolTable = new ArrayList<SymbolTable>();
         this.results = new ArrayList<LexicalResults>();
-        this.errors = new ArrayList<LexicalErrors>();
+        this.errors = new ArrayList<ErrorTable>();
     }
 
     /**
@@ -108,7 +109,7 @@ public class LexicalAnalyzer {
      * from source code to automaton.
      * 
      */
-    public Object[] start() {
+    public List[] start() {
         int lineIndex = 0;
         for (String line : this.sourceCode) {
             ++lineIndex;
@@ -118,7 +119,7 @@ public class LexicalAnalyzer {
             }
         }
         populateTables();
-        return new Object[] {
+        return new List[] {
             this.lexemeTable, this.symbolTable, this.errors
         };
     }

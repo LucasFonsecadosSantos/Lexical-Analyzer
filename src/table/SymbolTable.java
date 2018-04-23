@@ -20,8 +20,9 @@
  *         https://github.com/alanluz
  * 
  */
-package app;
+package table;
 
+import app.Token;
 import model.LexemeType;
 
 /**

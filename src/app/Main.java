@@ -24,35 +24,33 @@ package app;
 
 import java.util.List;
 import java.util.ArrayList;
-import app.LexemeTable;
-import app.SymbolTable;
-import utils.LexicalErrors;
+import table.LexemeTable;
+import table.SymbolTable;
+import table.ErrorTable;
 import view.GUI;
 
 public class Main {
 
     public static void main(String[] args) {
         LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer(args[0]);
-        Object[] results = lexicalAnalyzer.start();
-        if (results[0] instanceof List) {
-            List<LexemeTable> lexemeTable = (List<LexemeTable>) results[0];
-            for (LexemeTable lt : lexemeTable) {
-                GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"] " + "(" + lt.getToken().getLexemeClass() + ")");
-            }
+        List[] results = lexicalAnalyzer.start();
+
+        List<LexemeTable> lexemeTable = results[0];
+        List<SymbolTable> symbolTable = results[1];
+        List<ErrorTable> errorTable = results[2];
+
+        for (LexemeTable lt : lexemeTable) {
+            GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"] " + "(" + lt.getToken().getLexemeClass() + ")");
         }
-        if (results[1] instanceof List) {
-            List<SymbolTable> symbolTable = (List<SymbolTable>) results[1];
-            for (SymbolTable st : symbolTable) {
-                GUI.printInformationMessage(st.getLexeme() + " " + st.getIndex());
-            }
+
+        for (SymbolTable st : symbolTable) {
+            GUI.printInformationMessage(st.getLexeme() + " " + st.getIndex());
         }
-        if (results[2] instanceof List) {
-            List<LexicalErrors> errors = (List<LexicalErrors>) results[2];
-            for (LexicalErrors le : errors) {
-                GUI.printErrorMessage(le.getType().toString(),
-                    "(" + le.getLine() + "," + le.getColumn() 
-                    + ") " + le.getDescription());
-            }
+
+        for (ErrorTable le : errorTable) {
+            GUI.printErrorMessage(le.getType().toString(),
+            "(" + le.getLine() + "," + le.getColumn() 
+            + ") " + le.getDescription());
         }
     }
 }

@@ -25,7 +25,7 @@ package utils;
 import view.GUI;
 import model.LexemeType;
 import model.ErrorType;
-import app.SymbolTable;
+import table.SymbolTable;
 import app.LexicalResults;
 import java.util.List;
 import java.util.ArrayList;
@@ -165,7 +165,7 @@ public class Automaton {
         currentLexeme =0;
     }
 
-    public LexicalResults makeTokens(String sourceLine, int index) {
+    public LexicalResults makeTokens(String sourceLine, int lineNumber) {
         if (!sourceLine.equals("")) {
             String[] lexemes = sourceLine.split(" ");
             String[] splitedLexeme;
@@ -186,10 +186,10 @@ public class Automaton {
                     currentSymbol = lexeme.charAt(0);
                     if (isComment(lexeme)) {
                         ++currentLexeme;
-                        storeComment(commentHandler(lexeme, lexemes, index, columnNumber), currentLexeme);
+                        storeComment(commentValidation(lexeme, lexemes, columnNumber), currentLexeme);
                         break;
                     } else if (isNumber(currentSymbol)) {
-                        columnNumber = numberHandler(lexeme, index, columnNumber);
+                        columnNumber = numberValidation(lexeme, lineNumber, columnNumber);
                         if (!this.errorState) {
                             ++currentLexeme;
                             storeNumber(lexeme, currentLexeme);
@@ -197,7 +197,7 @@ public class Automaton {
                             break;
                         }
                     } else if (isCharacter(currentSymbol)) {
-                        columnNumber = identifierHandler(lexeme, index, columnNumber);
+                        columnNumber = identifierValidation(lexeme, lineNumber, columnNumber);
                         if (!this.errorState) {
                             ++currentLexeme;
                             storeIdentifier(lexeme, currentLexeme);
@@ -213,10 +213,10 @@ public class Automaton {
                         currentSymbol = lexemeSplited.charAt(0);
                         if (isComment(lexeme)) {
                             ++currentLexeme;
-                            storeComment(commentHandler(lexemeSplited, splitedLexeme, index, columnNumber), currentLexeme);
+                            storeComment(commentValidation(lexemeSplited, splitedLexeme, columnNumber), currentLexeme);
                             break;
                         } else  if (isNumber(currentSymbol)) {
-                            columnNumber = numberHandler(lexemeSplited, index, columnNumber);
+                            columnNumber = numberValidation(lexemeSplited, lineNumber, columnNumber);
                             if (!this.errorState) {
                                 ++currentLexeme;
                                 storeNumber(lexemeSplited, currentLexeme);
@@ -224,7 +224,7 @@ public class Automaton {
                                 break;
                             }
                         } else if (isCharacter(currentSymbol)) {
-                            columnNumber = identifierHandler(lexemeSplited, index, columnNumber);
+                            columnNumber = identifierValidation(lexemeSplited, lineNumber, columnNumber);
                             if (!this.errorState) {
                                 ++currentLexeme;
                                 storeIdentifier(lexemeSplited, currentLexeme);
@@ -251,7 +251,7 @@ public class Automaton {
                 
     }
 
-    private String commentHandler(String lexeme, String[] lexemeArray, int index, int columnNumber) {
+    private String commentValidation(String lexeme, String[] lexemeArray, int columnNumber) {
         this.commentState = true;
         String commentLexeme = "";
         Boolean control = false;
@@ -266,7 +266,7 @@ public class Automaton {
         return commentLexeme;
     }
 
-    private int numberHandler(String lexeme, int index, int columnNumber) {
+    private int numberValidation(String lexeme, int index, int columnNumber) {
         char currentSymbol = lexeme.charAt(0);
         String tmpLexeme = "";
         tmpLexeme += currentSymbol;
@@ -283,7 +283,7 @@ public class Automaton {
         }
         return columnNumber;
     }
-    private int identifierHandler(String lexeme, int index, int columnNumber) {
+    private int identifierValidation(String lexeme, int index, int columnNumber) {
         char currentSymbol = lexeme.charAt(0);
         String tmpLexeme = "";
         tmpLexeme += currentSymbol;
@@ -293,7 +293,6 @@ public class Automaton {
             if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
                 tmpLexeme += currentSymbol;
             } else {
-                
                 this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, columnNumber);
                 this.errorState = true;
                 break;

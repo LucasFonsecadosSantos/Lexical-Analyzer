@@ -20,7 +20,8 @@
  *         https://github.com/alanluz
  * 
  */
-package utils;
+package table;
+
 import java.util.Map;
 import java.util.LinkedHashMap;
 import model.ErrorType;
@@ -40,7 +41,7 @@ import model.ErrorType;
  * @version 1.0
  * @since 1.0
  */
-public class LexicalErrors {
+public class ErrorTable {
     
     /**
      * The line number attribute.
@@ -78,7 +79,7 @@ public class LexicalErrors {
      * @param lineNumber The line number where it was found.
      * @param columnNumber The line column number where it was found.
      */
-    public LexicalErrors(ErrorType type, int lineNumber, int columnNumber) {
+    public ErrorTable(ErrorType type, int lineNumber, int columnNumber) {
         setType(type);
         setLineNumber(lineNumber);
         setColumnNumber(columnNumber);

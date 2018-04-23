@@ -24,7 +24,9 @@ package app;
 
 import model.ErrorType;
 import model.LexemeType;
-import utils.LexicalErrors;
+import table.ErrorTable;
+import table.LexemeTable;
+import table.SymbolTable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -58,7 +60,7 @@ public class LexicalResults {
     /**
      * The lexical errors list attribute
      */
-    private List<LexicalErrors> errors;
+    private List<ErrorTable> errors;
 
     /**
      * The lexical results object constructor.
@@ -68,7 +70,7 @@ public class LexicalResults {
     public LexicalResults() {
         this.lexemeTable = new ArrayList<LexemeTable>();
         this.symbolTable = new ArrayList<SymbolTable>();
-        this.errors = new ArrayList<LexicalErrors>();
+        this.errors = new ArrayList<ErrorTable>();
     }
 
     /**
@@ -125,7 +127,7 @@ public class LexicalResults {
     }
 
     public void addError(ErrorType type, int lineNumber, int columnNumber) {
-        this.errors.add(new LexicalErrors(type, lineNumber, columnNumber));
+        this.errors.add(new ErrorTable(type, lineNumber, columnNumber));
     }
 
     /**
@@ -154,7 +156,7 @@ public class LexicalResults {
      * 
      * @return List A errors list object.
      */
-    public List<LexicalErrors> getErrors() {
+    public List<ErrorTable> getErrors() {
         return this.errors;
     }
 }
