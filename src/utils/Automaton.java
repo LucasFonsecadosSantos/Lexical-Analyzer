@@ -194,7 +194,7 @@ public class Automaton {
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
                     if (lexeme.equals("")) continue;
                     currentSymbol = lexeme.charAt(0);
-                    if (isNumber(currentSymbol)) {
+                    if (isNumber(currentSymbol) && !this.commentState) {
                         columnNumber = numberValidation(lexeme, lineNumber, columnNumber);
                         if (!this.errorState) {
                             ++currentLexeme;
@@ -219,7 +219,7 @@ public class Automaton {
                         if(lexemeSplited.equals("")) continue;
                         ++columnNumber;
                         currentSymbol = lexemeSplited.charAt(0);
-                        if (isNumber(currentSymbol)) {
+                        if (isNumber(currentSymbol) && !this.commentState) {
                             columnNumber = numberValidation(lexemeSplited, lineNumber, columnNumber);
                             if (!this.errorState) {
                                 ++currentLexeme;
@@ -235,7 +235,7 @@ public class Automaton {
                             } else {
                                 break;
                             }
-                        } else if (isOperand(lexemeSplited)) {
+                        } else if (isOperand(lexemeSplited) && !this.commentState) {
                             ++currentLexeme;
                             storeOperator(lexemeSplited, currentLexeme);
                         } else if (isSeparator(currentSymbol)) {
@@ -308,6 +308,7 @@ public class Automaton {
     }
     private int identifierValidation(String lexeme, int index, int columnNumber) {
         char currentSymbol;
+        this.tmpStrLexeme = "";
         for (String symbol : this.commentDelimiter) {
             if (symbol.equals(lexeme)) {
                 this.commentState = true;

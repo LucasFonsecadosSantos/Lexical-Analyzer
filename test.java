@@ -1,13 +1,10 @@
-// teste dew comentario
-//cachorro
-// minha rola e grande demais asdiasiodjasdasiodia
-public void static main(String[] agrs) {
-    x + x =3;//carai
-    x++; //carai2
+// Carnia de zoio nao devemos tratar isso
+// comentario 02
+public class Compiler {
 
-    public static int mains(k menasn asiod) {
-        asdp { 
-            as<=asd ;//5
-        }
+    public Compiler(LexemeType type) {
+        int netinho = gay;
+        increase(k++);
     }
+
 }
