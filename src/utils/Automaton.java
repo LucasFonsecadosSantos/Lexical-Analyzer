@@ -120,6 +120,8 @@ public class Automaton {
      */
     private Boolean commentState;
 
+    private String tmpStrLexeme="";
+
     /**
      * The automaton object constructor.
      * It sets the following attributes:
@@ -162,7 +164,7 @@ public class Automaton {
             'W','X','Y','Z'
         };
         this.lexicalResults = new LexicalResults();
-        currentLexeme =0;
+        this.currentLexeme =0;
     }
 
     public LexicalResults makeTokens(String sourceLine, int lineNumber) {
@@ -170,13 +172,21 @@ public class Automaton {
             String[] lexemes = sourceLine.split(" ");
             String[] splitedLexeme;
             String tmpLexeme;
+            String commentString = "";
             char currentSymbol;
             int columnNumber = 0;
             Boolean comment = false;
+            Boolean tmpComment = false;
             this.errorState = false;
             this.commentState = false;
+
+            if ((commentString = getComment(sourceLine)) != null) {
+                tmpComment = true;
+            }
+            
             
             for (String lexeme : lexemes) {
+                this.tmpStrLexeme = "";
                 tmpLexeme = "";
                 this.errorState = false;
                 if(lexeme.equals("")) continue;
@@ -184,11 +194,7 @@ public class Automaton {
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
                     if (lexeme.equals("")) continue;
                     currentSymbol = lexeme.charAt(0);
-                    if (isComment(lexeme)) {
-                        ++currentLexeme;
-                        storeComment(commentValidation(lexeme, lexemes, columnNumber), currentLexeme);
-                        break;
-                    } else if (isNumber(currentSymbol)) {
+                    if (isNumber(currentSymbol)) {
                         columnNumber = numberValidation(lexeme, lineNumber, columnNumber);
                         if (!this.errorState) {
                             ++currentLexeme;
@@ -196,14 +202,16 @@ public class Automaton {
                         } else {
                             break;
                         }
-                    } else if (isCharacter(currentSymbol)) {
+                    } else if (isCharacter(currentSymbol) && !this.commentState) {
                         columnNumber = identifierValidation(lexeme, lineNumber, columnNumber);
                         if (!this.errorState) {
                             ++currentLexeme;
-                            storeIdentifier(lexeme, currentLexeme);
+                            storeIdentifier(this.tmpStrLexeme, currentLexeme);
                         } else {
                             break;
                         }
+                    } else {
+                        identifierValidation(lexeme, lineNumber, columnNumber);
                     }
                 } else {
                     for (String lexemeSplited : splitedLexeme) {
@@ -211,11 +219,7 @@ public class Automaton {
                         if(lexemeSplited.equals("")) continue;
                         ++columnNumber;
                         currentSymbol = lexemeSplited.charAt(0);
-                        if (isComment(lexeme)) {
-                            ++currentLexeme;
-                            storeComment(commentValidation(lexemeSplited, splitedLexeme, columnNumber), currentLexeme);
-                            break;
-                        } else  if (isNumber(currentSymbol)) {
+                        if (isNumber(currentSymbol)) {
                             columnNumber = numberValidation(lexemeSplited, lineNumber, columnNumber);
                             if (!this.errorState) {
                                 ++currentLexeme;
@@ -223,11 +227,11 @@ public class Automaton {
                             } else {
                                 break;
                             }
-                        } else if (isCharacter(currentSymbol)) {
+                        } else if (isCharacter(currentSymbol) && !this.commentState) {
                             columnNumber = identifierValidation(lexemeSplited, lineNumber, columnNumber);
                             if (!this.errorState) {
                                 ++currentLexeme;
-                                storeIdentifier(lexemeSplited, currentLexeme);
+                                storeIdentifier(this.tmpStrLexeme, currentLexeme);
                             } else {
                                 break;
                             }
@@ -244,6 +248,10 @@ public class Automaton {
                     }
                 }
             }
+            if (!commentString.equals("")) {
+                this.currentLexeme++;
+                storeComment(commentString, this.currentLexeme);
+            }
             return this.lexicalResults;
         } else {
             return null;
@@ -251,8 +259,23 @@ public class Automaton {
                 
     }
 
+    private String getComment(String line) {
+        String tmpComment = "";
+        Boolean commentFound = false;
+        for (int i=0 ; i < line.length() ; i++) {
+            if (commentFound) {
+                tmpComment += line.charAt(i);
+            }
+            if ((line.charAt(i) == '/') && (line.charAt(i+1) == '/') && !(commentFound)) {
+                tmpComment += String.valueOf(line.charAt(i)) + String.valueOf(line.charAt(i+1));
+                i += 1;
+                commentFound = true;
+            }
+        }
+        return tmpComment;
+    }
+
     private String commentValidation(String lexeme, String[] lexemeArray, int columnNumber) {
-        this.commentState = true;
         String commentLexeme = "";
         Boolean control = false;
         for (String commentString : lexemeArray) {
@@ -284,14 +307,20 @@ public class Automaton {
         return columnNumber;
     }
     private int identifierValidation(String lexeme, int index, int columnNumber) {
-        char currentSymbol = lexeme.charAt(0);
-        String tmpLexeme = "";
-        tmpLexeme += currentSymbol;
-        for (int i=1 ; i<lexeme.length() ; i++) {
-            ++columnNumber;
+        char currentSymbol;
+        for (String symbol : this.commentDelimiter) {
+            if (symbol.equals(lexeme)) {
+                this.commentState = true;
+                return columnNumber;
+            }
+        }
+        for (int i=0 ; i<lexeme.length() ; i++) {
             currentSymbol = lexeme.charAt(i);
             if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
-                tmpLexeme += currentSymbol;
+                this.tmpStrLexeme += currentSymbol;
+                ++columnNumber;
+            } else if ((i < lexeme.length()-1 ) && (currentSymbol == '/') && (lexeme.charAt(i+1) == '/')) {
+                return columnNumber;
             } else {
                 this.lexicalResults.addError(ErrorType.INVALID_LEXEME_ERR ,index, columnNumber);
                 this.errorState = true;
@@ -337,7 +366,6 @@ public class Automaton {
     private Boolean isComment(String lexeme) {
         for (String symbol : this.commentDelimiter) {
             if (lexeme.equals(symbol) || lexeme.contains(symbol)) {
-                System.out.println("LEXEMEEE " + lexeme);
                 return true;
             }
         }
@@ -373,7 +401,7 @@ public class Automaton {
     private String[] sliptBySpecialCharacteres(String lexeme) {
         for (char separator : this.separators) {
             for (String operand : this.operators) {
-                if (lexeme.contains(String.valueOf(separator)) || lexeme.contains(operand) || lexeme.contains("//")) {
+                if (lexeme.contains(String.valueOf(separator)) || lexeme.contains(operand)) {
                     return lexeme.replaceAll("(==?|&&|\\+[+=]?|<=|--?|[>!*,;.\\[{()}\\]])", "#$1#").split("#");
                 }
             }
@@ -389,7 +417,13 @@ public class Automaton {
      * @param character A symbol will be verificate if the symbol is or isn't a character.
      */
     private Boolean isCharacter(char character) {
-        return ((Character.isLetter(character) || character == '$' | character == '_'));
+        //return ((Character.isLetter(character) || character == '$' | character == '_'));
+        for (char symbol : this.identifierSymbols) {
+            if (character == symbol) {
+                return true;
+            }
+        }
+        return false;
     } 
 
     /**
