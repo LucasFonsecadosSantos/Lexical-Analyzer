@@ -22,13 +22,24 @@
  */
 package app;
 
-import java.util.List;
-import java.util.ArrayList;
 import table.LexemeTable;
 import table.SymbolTable;
 import table.ErrorTable;
 import view.GUI;
+import java.util.List;
+import java.util.ArrayList;
 
+/**
+ * This class is just used for
+ * tests.
+ * 
+ * @author Lucas Fonseca Dos Santos
+ * @author Igor Augusto da Costa Nunes
+ * @author Alan Luz Silveira
+ * @author Igor Emanuel Carvalho da Cruz
+ * @version 1.0
+ * @since 1.0
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -39,12 +50,16 @@ public class Main {
         List<SymbolTable> symbolTable = results[1];
         List<ErrorTable> errorTable = results[2];
 
+        GUI.printActionMessage("----------------------------[ LEXEME TABLE ]----------------------------");
+        GUI.printActionMessage("");
         for (LexemeTable lt : lexemeTable) {
-            GUI.printInformationMessage(lt.getLexeme() + " ["+lt.getToken().getSymbolTableIndex()+"] " + "(" + lt.getToken().getLexemeClass() + ")");
+            GUI.printInformationMessage(lt.getLexeme() + " [index: "+lt.getToken().getSymbolTableIndex()+"] " + "(" + lt.getToken().getLexemeClass() + ")");
         }
-
+        GUI.printActionMessage("");
+        GUI.printActionMessage("----------------------------[ SYMBOL TABLE ]----------------------------");
+        GUI.printActionMessage("");
         for (SymbolTable st : symbolTable) {
-            GUI.printInformationMessage(st.getLexeme() + " " + st.getIndex());
+            GUI.printInformationMessage(st.getLexeme() + " " + "[index: " + st.getIndex() + "]");
         }
 
         for (ErrorTable le : errorTable) {

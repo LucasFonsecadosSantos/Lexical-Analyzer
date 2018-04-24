@@ -1,5 +1,6 @@
 app
 dao
 model
+table
 utils
 view

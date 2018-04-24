@@ -122,10 +122,22 @@ public class LexicalResults {
         this.lexemeTable.add(lexemeTable);
     }
 
+    /**
+     * Accessor method of symbol table attribute.
+     * 
+     * @param symbolTable The symbolTable object to be add.
+     */
     public void addSymbolTable(SymbolTable symbolTable) {
         this.symbolTable.add(symbolTable);
     }
 
+    /**
+     * Accessor method of error table attribute.
+     * 
+     * @param type The error class.
+     * @param lineNumber The source code line.
+     * @param columnNumber The current column number.
+     */
     public void addError(ErrorType type, int lineNumber, int columnNumber) {
         this.errors.add(new ErrorTable(type, lineNumber, columnNumber));
     }

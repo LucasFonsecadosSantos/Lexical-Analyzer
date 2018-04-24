@@ -116,10 +116,13 @@ public class Automaton {
     private Boolean errorState;
 
     /**
-     * Comment state attribute;
+     * Comment state attribute.
      */
     private Boolean commentState;
 
+    /**
+     * Temporary lexeme construction attribute.
+     */
     private String tmpStrLexeme="";
 
     /**
@@ -167,6 +170,16 @@ public class Automaton {
         this.currentLexeme = 0;
     }
 
+    /**
+     * This is automaton core. It's process all lexemes received from
+     * source code line, validating all lexeme symbol by symbol.
+     * The validations are made by language grammar definitions,
+     * identifying errors and success lexemes.
+     * 
+     * @param sourceLine Source code line.
+     * @param lineNumber Source code line number.
+     * @return LexicalResults A lexical result object with all tables constructed by automaton process.
+     */
     public LexicalResults makeTokens(String sourceLine, int lineNumber) {
         if (!sourceLine.equals("")) {
             String[] lexemes = sourceLine.split(" ");
@@ -190,6 +203,8 @@ public class Automaton {
                 this.errorState = false;
                 if(lexeme.equals("")) continue;
                 columnNumber++;
+
+                //If the source line contains a special symbol like +-*();[]
                 if ((splitedLexeme = sliptBySpecialCharacteres(lexeme)) == null) {
                     if (lexeme.equals("")) continue;
                     currentSymbol = lexeme.charAt(0);
@@ -258,6 +273,13 @@ public class Automaton {
                 
     }
 
+    /**
+     * Comment handling method. This method runs the
+     * source code line searching a comment delimiter
+     * and after that, returns it to save by next.
+     * 
+     * @param line Source code line.
+     */
     private String getComment(String line) {
         String tmpComment = "";
         Boolean commentFound = false;
@@ -274,6 +296,15 @@ public class Automaton {
         return tmpComment;
     }
 
+    /**
+     * This method is responsible for validation of any comments pattern, delimited
+     * by '//' symbols.
+     * 
+     * @param lexeme The lexeme (first in source code line).
+     * @param lexemeArray The source code line.
+     * @param columnNumber The current column number.
+     * @return String The string comment extract from source code line.
+     */
     private String commentValidation(String lexeme, String[] lexemeArray, int columnNumber) {
         String commentLexeme = "";
         Boolean control = false;
@@ -288,6 +319,14 @@ public class Automaton {
         return commentLexeme;
     }
 
+    /**
+     * This method is responsible for number pattern validation.
+     * 
+     * @param lexeme The lexeme to be validated.
+     * @param index The source code line number.
+     * @param columnNumber The column number.
+     * @return int The column number update.
+     */
     private int numberValidation(String lexeme, int index, int columnNumber) {
         char currentSymbol = lexeme.charAt(0);
         String tmpLexeme = "";
@@ -305,6 +344,14 @@ public class Automaton {
         }
         return columnNumber;
     }
+
+    /**
+     * This method is responsible for identifier pattern validation.
+     * 
+     * @param lexeme The lexeme to be validated.
+     * @param index The source code line number.
+     * @param columnNumber The column number update.
+     */
     private int identifierValidation(String lexeme, int index, int columnNumber) {
         char currentSymbol;
         this.tmpStrLexeme = "";
@@ -314,7 +361,6 @@ public class Automaton {
                 return columnNumber;
             }
         }
-        
         for (int i=0 ; i<lexeme.length() ; i++) {
             currentSymbol = lexeme.charAt(i);
             if ((isCharacter(currentSymbol)) || (isNumber(currentSymbol))) {
@@ -332,23 +378,58 @@ public class Automaton {
         return columnNumber;
     }
     
+    /**
+     * This method is responsible for stores a comment, extracted
+     * from source code line.
+     * 
+     * @param lexeme A comment lexeme to be stored.
+     * @param lexemeIndex The lexeme index value.
+     */
     private void storeComment(String lexeme, int lexemeIndex) {
         this.lexicalResults.addLexemeTable(" " + lexeme, LexemeType.COMMENT, currentLexeme);
     }
 
+    /**
+     * This method is responsible for stores a separator lexeme at lexeme table,
+     * extracted from source code line.
+     * 
+     * @param lexeme A separator lexeme to be stored.
+     * @param lexemeIndex A separator lexeme index value.
+     */
     private void storeSeparator(char lexeme, int lexemeIndex) {
         this.lexicalResults.addLexemeTable(String.valueOf(lexeme), LexemeType.SEPARATOR, lexemeIndex);
     }
 
+    /**
+     * This method is responsible for stores a operator lexeme at lexeme table,
+     * extracted from source code line.
+     * 
+     * @param lexeme A operator lexeme to be stored.
+     * @param lexemeIndex A operator lexeme index value.
+     */
     private void storeOperator(String lexeme, int lexemeIndex) {
         this.lexicalResults.addLexemeTable(lexeme, LexemeType.OPERATOR, lexemeIndex);
     }
 
+    /**
+     * This method is responsible for stores a number lexeme at lexeme table,
+     * extracted from source code line.
+     * 
+     * @param lexeme A number lexeme to be stored.
+     * @param lexemeIndex A number lexeme index value.
+     */
     private void storeNumber(String lexeme, int lexemeIndex) {
         this.lexicalResults.addSymbolTable(new SymbolTable(LexemeType.INT_LITERAL, lexeme, lexemeIndex)); 
         this.lexicalResults.addLexemeTable(lexeme, LexemeType.INT_LITERAL, lexemeIndex);
     }
 
+    /**
+     * This method is responsible for stores a identifier lexeme at lexeme table,
+     * extracted from source code line.
+     * 
+     * @param lexeme A identifier lexeme to be stored.
+     * @param lexemeIndex A identifier lexeme index value.
+     */
     private void storeIdentifier(String lexeme, int lexemeIndex) {
         if (isReservedWord(lexeme)) {
             this.lexicalResults.addLexemeTable(lexeme, LexemeType.RESERVED_SYMBOL, lexemeIndex);
