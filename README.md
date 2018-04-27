@@ -1,3 +1,5 @@
+[![Build 
+Status](https://travis-ci.org/LucasFonsecadosSantos/Lexical-Analyzer.svg?branch=master)](https://travis-ci.org/LucasFonsecadosSantos/Lexical-Analyzer)
 # Lexical Analyzer
 ###### Description
 It's the pratical project step #1 of Compiler Discipline by Federal 
